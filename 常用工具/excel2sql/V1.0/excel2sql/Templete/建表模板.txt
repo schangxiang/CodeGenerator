@@ -1,0 +1,41 @@
+/*==============================================================*/
+/* Table: $TableName$				                   */
+/* Description: $TableChinaDesc$									    */
+/* Author: $Author$												*/
+/* createTime: $CreateTime$								    */
+/*==============================================================*/
+IF NOT EXISTS( SELECT 1 FROM SYSOBJECTS  WHERE ID = OBJECT_ID('$TableName$') AND TYPE = 'U')
+create table $TableName$ (
+   $PrimaryKey$			   int       identity(1,1)  not null,-- 主键(自增列)
+   
+   $ColumnListStr$
+   
+   delFlag                bit            NULL, -- 是否删除
+   creator		            nvarchar(50)	 null, -- 创建人
+   createTime		          datetime	 null, -- 创建时间
+   lastModifier		         nvarchar(50)	 null, -- 修改人
+   lastModifyTime         datetime	 null  -- 修改时间
+   constraint PK_$TableName$ primary key ($PrimaryKey$) 
+)
+GO
+
+$UniqueIndex$
+
+SET ANSI_PADDING OFF
+GO
+
+$ColumnsAnnotation$
+
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'主键' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'$TableName$', @level2type=N'COLUMN',@level2name=N'$PrimaryKey$'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'删除标记' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'$TableName$', @level2type=N'COLUMN',@level2name=N'delFlag'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'创建人' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'$TableName$', @level2type=N'COLUMN',@level2name=N'creator'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'创建时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'$TableName$', @level2type=N'COLUMN',@level2name=N'createTime'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'修改人' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'$TableName$', @level2type=N'COLUMN',@level2name=N'lastModifier'
+GO
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'修改时间' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'$TableName$', @level2type=N'COLUMN',@level2name=N'lastModifyTime'
+GO
