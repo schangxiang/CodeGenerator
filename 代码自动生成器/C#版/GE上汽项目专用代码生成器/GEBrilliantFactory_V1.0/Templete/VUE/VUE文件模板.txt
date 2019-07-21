@@ -1,0 +1,304 @@
+<template>
+  <div>
+    <div class="wrap-out-box">
+      <div class="han-box">
+        <el-form :inline="true" class="demo-form-inline" v-bind:model="serachObj">
+		  $el-form-itemForSearch$
+          <el-form-item>
+            <el-button type="primary" icon="el-icon-search" @click="fetchData">查&nbsp;询</el-button>
+            <el-button type="warning" icon="el-icon-refresh" @click="reset">重&nbsp;置</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+	  <div class="han-box">
+        <el-form :inline="true" class="demo-form-inline">
+          <el-form-item>
+            <el-button type="success" icon="el-icon-plus" @click="addData">新&nbsp;增</el-button>
+          </el-form-item>
+        </el-form>
+      </div>
+      <div class="table-box">
+        <el-table v-bind:data="$TableAlias$List" stripe>
+		  <el-table-column
+            type="index"
+            :index="indexMethod"
+            label="序号"
+			align="center"
+            width="50">
+          </el-table-column>
+		  $el-table-column$
+          <el-table-column fixed="right" label="操作" width="150" align="center">
+            <template slot-scope="scope">
+              <el-button @click="handleClickForUpdate(scope.row)" type="text" size="small" icon="el-icon-edit" >修&nbsp;改</el-button>
+              <el-button @click="handleClickForEnable(scope.row)"
+                         type="text"
+                         size="small"
+                         :icon="scope.row.delFlag==true?'el-icon-circle-check-outline':'el-icon-circle-close-outline'">{{scope.row.delFlag==true?'启用':'禁用'}}</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="pagination-box">
+        <el-pagination v-bind:current-Page="pageIndex" v-bind:page-size="pageSize" :total="total"
+                       layout="total,sizes,prev,pager,next,jumper" v-bind:page-sizes="pageSizes"
+                       v-on:size-change="sizeChange" v-on:current-change="pageIndexChange">
+        </el-pagination>
+      </div>
+      <div>
+        <el-dialog
+          :title="dialogTitle"
+          :visible.sync="dialogVisible"
+          width="40%"
+          >
+          <el-form v-bind:model="$TableAlias$" ref="$TableAlias$" label-position="left" label-width="100px">
+            <el-row :gutter="20">
+			  $el-col$
+              <el-col :span="24">
+                <el-form-item>
+                  <el-button type="primary" :disabled="submitDisabled" @click="updateData('$TableAlias$')">确 定</el-button>
+                  <el-button @click="dialogVisible = false">取 消</el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </el-form>
+        </el-dialog>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+import { formatterDateTime, getSingle$Modulelogo$, get$Modulelogo$List, update$Modulelogo$, insert$Modulelogo$, enable$Modulelogo$} from 'api/wipmgmt'
+export default {
+  data() {
+    return {
+	  ck_delflag: [],// 是否禁用数组
+      serachObj: {}, // 查询对象
+      isAdd: false, // 是否是新增
+      submitDisabled: false, // 提交按钮禁用
+      $TableAlias$List: [], // 列表对象
+      $TableAlias$: {}, // 行对象
+      dialogVisible: false, // dialog显示隐藏
+      dialogTitle: '新增',
+      pageSizes: [10, 20, 50, 100],
+      total: 0, // 总条数
+      pageIndex: 1, // 第几页
+      pageSize: 10 // 总条数
+    }
+  },
+  mounted() {
+    this.fetchData()
+  },
+  methods: {
+    // 是否禁用
+    ckDelFlag (value) {
+      if (value.length === 2 || value.length === 0) {
+        this.serachObj.delFlag = ''
+      } else {
+        this.serachObj.delFlag = '1'  // 默认禁用
+        if (value[0] === '启用') {
+          this.serachObj.delFlag = '0'
+        }
+      }
+    },
+    // 设置索引
+    indexMethod (index) {
+      return (this.pageIndex - 1) * this.pageSize + 1 + index 
+    },
+    // 时间格式化
+    formatterDateTime (row, column, cellValue, index) {
+      return formatterDateTime(cellValue)
+    },
+	// 格式化是否禁用字符串
+    formatterDelFlag (row, column, cellValue, index) {
+      if (cellValue) { return '禁用' } else { return '启用' }
+    },
+    // 重置查询
+    reset() {
+	  this.ck_delflag = []
+      this.serachObj = {}
+      this.afreshFetchData()
+    },
+    // 重新加载列表
+    afreshFetchData() {
+      this.pageIndex = 1
+      this.pageSize = 10
+      this.fetchData()
+    },
+    // 加载列表
+    fetchData() {
+      this.$TableAlias$List = []
+      this.serachObj.pageIndex = this.pageIndex
+      this.serachObj.pageSize = this.pageSize
+      get$Modulelogo$List(this.serachObj).then(res => {
+		if (res.resCode === '00000') {
+          this.total = res.resData.total
+		  this.$TableAlias$List = res.resData.rows
+        } else {
+          this.$notify.error({
+            title: '错误',
+            message: res.resMsg
+          })
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    // 改变总条数动作
+    sizeChange(pageSize) {
+      this.pageSize = pageSize
+      this.fetchData()
+    },
+    // 改变页码动作
+    pageIndexChange(pageIndex) {
+      this.pageIndex = pageIndex
+      this.fetchData()
+    },
+    // 新增数据
+    addData() {
+      this.isAdd = true
+      this.dialogTitle = '新增'
+      this.$TableAlias$ = {}
+      this.dialogVisible = true
+      this.submitDisabled = false
+    },
+    // 禁/启用
+    handleClickForEnable(row) {
+	  var alertMsg = '启用'
+      var delFlag = '0'
+      if (!row.delFlag) {
+        alertMsg = '禁用'
+        delFlag = '1'
+      }
+      this.$confirm('确定要' + alertMsg + '吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.isAdd = false
+        this.$TableAlias$ = {}
+        var data = {
+          $PrimaryKey$: row.$PrimaryKey$,
+		  delFlag: delFlag
+        }
+        enable$Modulelogo$(data).then(res => {
+          if (res.resCode === '00000') {
+            this.$notify({
+              title: '成功',
+              message: alertMsg + '成功',
+              type: 'success'
+            })
+            this.afreshFetchData()
+          } else {
+            this.$notify.error({
+              title: '错误',
+              message: res.resMsg
+            })
+          }
+        }).catch(err => {
+          console.log(err)
+        })
+      }).catch(() => {
+        
+      })
+    },
+    // 点击 【修改】
+    handleClickForUpdate(row) {
+      this.isAdd = false
+      this.dialogTitle = '编辑'
+      this.$TableAlias$ = {}
+      var data = {
+        $PrimaryKey$: row.$PrimaryKey$
+      }
+      getSingle$Modulelogo$(data).then(res => {
+        if (res.resCode === '00000') {
+          this.$TableAlias$ = res.resData
+          this.dialogVisible = true
+          this.submitDisabled = false
+        } else {
+          this.$notify.error({
+            title: '错误',
+            message: res.resMsg
+          })
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    // 更新数据
+    updateData(formName) {
+      this.submitDisabled = true
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          var data = this.$TableAlias$
+          if (this.isAdd) {
+            insert$Modulelogo$(data).then(res => {
+              if (res.resCode === '00000') {
+                this.dialogVisible = false
+                this.$notify({
+                  title: '成功',
+                  message: '新增成功',
+                  type: 'success'
+                })
+                this.afreshFetchData()
+              } else {
+                this.submitDisabled = false
+                this.$notify.error({
+                  title: '错误',
+                  message: '新增失败,' + res.resMsg
+                })
+              }
+            }).catch(err => {
+              console.log(err)
+            })
+          } else {
+            update$Modulelogo$(data).then(res => {
+              if (res.resCode === '00000') {
+                this.dialogVisible = false
+                this.$notify({
+                  title: '成功',
+                  message: '更新成功',
+                  type: 'success'
+                })
+                this.afreshFetchData()
+              } else {
+                this.submitDisabled = false
+                this.$notify.error({
+                  title: '错误',
+                   message: '更新失败,' + res.resMsg
+                })
+              }
+            }).catch(err => {
+              console.log(err)
+            })
+          }
+        } else {
+          this.submitDisabled = false
+          return false
+        }
+      })
+    }
+  },
+  components: {
+  }
+}
+</script>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  @import '~common/stylus/variable';
+
+  .han-box {
+    padding-bottom: 0;
+  }
+
+  .pagination-box {
+    padding: 20px;
+    padding-bottom: 0;
+    text-align: right;
+  }
+
+  .table-box {
+    .el-table {
+      border: 1px solid #ddd;
+     }
+  }
+</style>
