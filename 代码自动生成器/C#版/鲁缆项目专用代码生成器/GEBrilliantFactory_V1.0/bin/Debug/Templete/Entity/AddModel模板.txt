@@ -1,0 +1,14 @@
+using System;
+using System.Runtime.Serialization;
+
+namespace $namespace_model$
+{
+    /// <summary>
+    /// 新增$ChinaComment$参数类
+    /// </summary>
+	[DataContract]
+    public class $AddEntityParam$
+    {
+        $AddAttributes$
+    }
+}

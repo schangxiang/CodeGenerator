@@ -1,0 +1,11 @@
+------------------------------------ 
+--用途：生成一条InsertSQL
+--说明： 
+--作者: $Author$ 
+--时间：$CurDate$ 
+------------------------------------ 
+INSERT INTO [$TableName$](
+	$insert_cols$
+	)VALUES(
+	$insert_cols_values$
+	)

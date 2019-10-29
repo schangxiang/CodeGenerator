@@ -1,0 +1,178 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
+using $namespace_common$;
+using $namespace_dal$;
+using $namespace_model$;
+
+namespace $namespace_bll$
+{
+    /// <summary>
+    /// $ChinaComment$业务处理类
+    /// </summary>
+    public class $FilePrefixName$BLL
+    {
+        private readonly $FilePrefixName$DAL $TableAlias$DAL = new $FilePrefixName$DAL();
+
+        #region Add
+
+		 /// <summary>
+        /// 增加一条$ChinaComment$数据
+        /// </summary>
+        /// <param name="param">要增加的$ChinaComment$参数类</param>
+		/// <param name="creator">创建人</param>
+        /// <returns>插入的最新主键值</returns>
+        public int Add($AddEntityParam$ param,string creator)
+        {
+			$EntityName$ model = null;
+			model = WIPCommon.T1ToT2<$AddEntityParam$, $EntityName$>(param);
+			model.creator = model.lastModifier = creator;
+		    model.createTime = model.lastModifyTime = DateTime.Now;
+			model.delFlag=false;
+            return $TableAlias$DAL.Add(model);
+        }
+
+        #endregion
+
+        #region Edit
+
+        /// <summary>
+        /// 更新一条$ChinaComment$数据
+        /// </summary>
+        /// <param name="model">要更新的$ChinaComment$实体</param>
+		/// <param name="lastModifier">最后修改人</param>
+        /// <returns>更新是否成功</returns>
+        public bool Update($EntityName$ model,string lastModifier)
+        {
+			model.lastModifier = lastModifier;
+		    model.lastModifyTime = DateTime.Now;
+            return $TableAlias$DAL.Update(model);
+        }
+
+        #endregion
+
+        #region Del
+
+        /// <summary>
+        /// 删除一条$ChinaComment$数据
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+        /// <returns>是否删除成功</returns>
+        public bool Delete(string $PrimaryKey$)
+        {
+            return $TableAlias$DAL.Delete($PrimaryKey$);
+        }
+
+        #endregion
+
+		#region Enable
+
+        /// <summary>
+        /// 禁启用$ChinaComment$数据
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+		/// <param name="delFlag">禁用1/启用0</param>
+		/// <param name="lastModifier">最后修改人</param>
+		/// <param name="transModel">事务类</param>
+        /// <returns>是否禁启用成功</returns>
+        public bool Enable(string $PrimaryKey$, string delFlag, string lastModifier)
+        {
+            return $TableAlias$DAL.Enable($PrimaryKey$,delFlag,lastModifier);
+        }
+
+        #endregion
+
+        #region QueryList(Page)
+
+        /// <summary>
+        /// 获得$ChinaComment$数据列表(分页)
+        /// </summary>
+        /// <param name="pageParam">查询参数</param>
+        /// <returns>$ChinaComment$分页数据</returns>
+        public PageResultModel<$EntityName$> GetModelListForPage(Query$Modulelogo$Param pageParam)
+        {
+            DataSet ds = $TableAlias$DAL.GetModelListForPage(pageParam);
+            List<$EntityName$> list = DataTableToList(ds.Tables[0]);
+            int total = Convert.ToInt32(ds.Tables[1].Rows[0]["COUNT"]);
+            PageResultModel<$EntityName$> result = new PageResultModel<$EntityName$>();
+            result.total = total;
+            result.rows = list;
+            return result;
+        }
+
+        #endregion
+
+		#region QueryList
+
+        /// <summary>
+        /// 获得$ChinaComment$数据列表
+        /// </summary>
+        /// <param name="strWhere">查询条件</param>
+        /// <returns>$ChinaComment$数据集合</returns>
+        public List<$EntityName$> GetModelList(string strWhere)
+        {
+            DataSet ds = $TableAlias$DAL.GetList(strWhere);
+            return DataTableToList(ds.Tables[0]);
+        }
+
+        #endregion
+
+        #region Query(Single)
+
+        /// <summary>
+        /// 得到一个$ChinaComment$实体
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+        /// <returns>$ChinaComment$实体</returns>
+        public $EntityName$ GetModel(string $PrimaryKey$)
+        {
+
+            return $TableAlias$DAL.GetModel($PrimaryKey$);
+        }
+
+        #endregion
+
+        #region Other
+
+        /// <summary>
+        /// 是否存在该$ChinaComment$记录
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+        /// <returns></returns>
+        public bool Exists(string $PrimaryKey$, int? id = null)
+        {
+            return $TableAlias$DAL.Exists($PrimaryKey$,id);
+        }
+
+        #endregion
+
+		#region Common
+
+		/// <summary>
+        /// 获得$ChinaComment$数据列表
+        /// </summary>
+        private List<$EntityName$> DataTableToList(DataTable dt)
+        {
+            List<$EntityName$> modelList = new List<$EntityName$>();
+            int rowsCount = dt.Rows.Count;
+            if (rowsCount > 0)
+            {
+                $EntityName$ model;
+                for (int n = 0; n < rowsCount; n++)
+                {
+                    model = new $EntityName$();
+                    var dataRow = dt.Rows[n];
+
+                    $ToSingleModel$
+
+
+                    modelList.Add(model);
+                }
+            }
+            return modelList;
+        }
+
+		#endregion
+
+    }
+}

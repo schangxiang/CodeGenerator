@@ -1,0 +1,39 @@
+IF EXISTS (SELECT 1 FROM dbo.sysobjects WHERE id = object_id(N'[$GetPageListProcName$]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+  DROP PROCEDURE [$GetPageListProcName$]
+GO
+------------------------------------
+--用途：获得$ChinaComment$数据列表(分页)
+--说明：
+--作者: $Author$
+--时间：$CurDate$
+------------------------------------
+CREATE PROCEDURE $GetPageListProcName$
+	$page_cols_params$
+	@pageIndex  int,
+	@pageSize int 
+AS 
+  DECLARE @startRow int, @endRow int
+
+  SET nocount ON;
+
+  SET @startRow = (@pageIndex - 1) * @pageSize +1 
+  SET @endRow = @startRow + @pageSize -1 
+
+  -- 查询分页数据
+  SELECT $strQueryCol_1$
+  FROM 
+  (
+     SELECT ROW_NUMBER() Over(order by id desc ) AS row_num,
+			$strQueryCol_2$
+			FROM $TableName$ AS $TableAlias$ WITH(NOLOCK) 
+			WHERE $where_cols_params$
+  ) AS tabledata
+  WHERE row_num  BETWEEN cast(@startRow as nvarchar(20)) AND +cast(@endRow as nvarchar(20)) 
+
+  -- 查询总条数
+  SELECT COUNT(1) AS COUNT FROM $TableName$ AS $TableAlias$ WITH(NOLOCK) 
+  WHERE $where_cols_params$
+   
+  SET nocount OFF;
+GO
+

@@ -1,0 +1,257 @@
+using System;
+using System.Text;
+using System.Data.SqlClient;
+using System.Data;
+using $namespace_model$;
+
+namespace $namespace_dal$
+{
+    /// <summary>
+    /// $ChinaComment$数据访问类
+    /// </summary>
+    public class $FilePrefixName$DAL
+    {
+        #region Add
+
+        /// <summary>
+        /// 增加一条$ChinaComment$数据
+        /// </summary>
+        /// <param name="model">要插入的$ChinaComment$实体</param>
+		/// <param name="transModel">事务类</param>
+        /// <returns>插入生成的最新主键值</returns>
+        public int Add($EntityName$ model,TransactionModel transModel = null)
+        {
+		    SqlParameter param_id = new SqlParameter();
+            param_id.ParameterName = "@id";
+            param_id.SqlDbType = SqlDbType.Int;
+            param_id.Direction = ParameterDirection.Output;
+
+            $AddSqlParameter$ 
+          
+			int rowsAffected;
+			if (transModel != null)
+            {
+                DbHelperSQL.RunProcedure(transModel.conn,transModel.trans, "$AddProcName$", parameters, out rowsAffected);
+			}
+			else
+			{
+                DbHelperSQL.RunProcedure("$AddProcName$", parameters, out rowsAffected);
+			}
+            return (int)parameters[parameters.Length - 1].Value;
+        }
+
+        #endregion
+
+        #region Edit
+
+        /// <summary>
+        /// 更新一条$ChinaComment$数据
+        /// </summary>
+        /// <param name="model">要更新的$ChinaComment$实体</param>
+		/// <param name="transModel">事务类</param>
+        /// <returns>是否更新成功</returns>
+        public bool Update($EntityName$ model,TransactionModel transModel = null)
+        {
+		    $UpdateSqlParameter$
+
+            int rowsAffected = 0;
+			if (transModel != null)
+            {
+                DbHelperSQL.RunProcedure(transModel.conn,transModel.trans, "$UpdateProcName$", parameters, out rowsAffected);
+			}
+			else
+			{
+                DbHelperSQL.RunProcedure("$UpdateProcName$", parameters, out rowsAffected);
+			}
+            if (rowsAffected > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Del
+
+        /// <summary>
+        /// 删除一条$ChinaComment$数据
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+		/// <param name="transModel">事务类</param>
+        /// <returns>是否删除成功</returns>
+        public bool Delete(string $PrimaryKey$,TransactionModel transModel = null)
+        {
+
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("DELETE FROM $TableName$ ");
+            strSql.Append(" WHERE $PrimaryKey$=@$PrimaryKey$");
+            SqlParameter[] parameters = {
+                    new SqlParameter("@$PrimaryKey$", SqlDbType.NVarChar,50)
+            };
+            parameters[0].Value = $PrimaryKey$;
+
+            int rows = 0;
+			if (transModel != null)
+            {
+                rows = DbHelperSQL.ExecuteSql(transModel.conn, transModel.trans, strSql.ToString(), parameters);
+			}
+			else
+			{
+                rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+			}
+            if (rows > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        #endregion
+
+		#region Enable
+
+        /// <summary>
+        /// 禁启用$ChinaComment$数据
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+		/// <param name="delFlag">禁用1/启用0</param>
+		/// <param name="lastModifier">最后修改人</param>
+		/// <param name="transModel">事务类</param>
+        /// <returns>是否禁启用成功</returns>
+        public bool Enable(string $PrimaryKey$, string delFlag, string lastModifier, TransactionModel transModel = null)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append(" UPDATE $TableName$  SET delflag=@delFlag ");
+            strSql.Append(" ,lastModifier=@lastModifier ");
+            strSql.Append(" ,lastModifyTime=@lastModifyTime ");
+            strSql.Append(" WHERE $PrimaryKey$=@$PrimaryKey$");
+            SqlParameter[] parameters = { 
+                    new SqlParameter("@delFlag", SqlDbType.NVarChar,10) ,
+                    new SqlParameter("@lastModifier", SqlDbType.NVarChar,20) ,
+                    new SqlParameter("@lastModifyTime", SqlDbType.DateTime) ,
+                    new SqlParameter("@$PrimaryKey$", SqlDbType.NVarChar,50) 
+            };
+            parameters[0].Value = delFlag;
+            parameters[1].Value = lastModifier;
+            parameters[2].Value = DateTime.Now;
+            parameters[3].Value = $PrimaryKey$;
+
+            int rows = 0;
+            if (transModel != null)
+            {
+                rows = DbHelperSQL.ExecuteSql(transModel.conn, transModel.trans, strSql.ToString(), parameters);
+            }
+            else
+            {
+                rows = DbHelperSQL.ExecuteSql(strSql.ToString(), parameters);
+            }
+            return rows > 0 ? true : false;
+        }
+
+        #endregion
+
+        #region QueryList(Page)
+
+        /// <summary>
+        /// 获得$ChinaComment$数据列表(分页)
+        /// </summary>
+        /// <param name="pageParam">分页实体数据</param>
+        /// <returns>$ChinaComment$列表DataSet</returns>
+        public DataSet GetModelListForPage(Query$Modulelogo$Param pageParam)
+        {
+            $QueryPageSqlParameter$
+
+            return DbHelperSQL.RunProcedure("$GetPageListProcName$", parameters, "pagetable");
+        }
+
+        #endregion
+
+		#region QueryList
+
+        /// <summary>
+        /// 获得$ChinaComment$数据列表
+        /// </summary>
+        /// <param name="strWhere">查询条件</param>
+        /// <returns>$ChinaComment$列表DataSet</returns>
+        public DataSet GetList(string strWhere)
+        {
+            SqlParameter[] parameters = {
+                        new SqlParameter("@strWhere", SqlDbType.NVarChar,500) 
+            };
+            parameters[0].Value = strWhere;
+            return DbHelperSQL.RunProcedure("$GetListProcName$", parameters, "table");
+        }
+
+        #endregion
+
+        #region Query(Single)
+
+        /// <summary>
+        /// 得到一个$ChinaComment$实体
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+        /// <returns>$ChinaComment$实体</returns>
+        public $EntityName$ GetModel(string $PrimaryKey$)
+        {
+            SqlParameter[] parameters = {
+                    new SqlParameter("@$PrimaryKey$", SqlDbType.VarChar,50)
+            };
+            parameters[0].Value = $PrimaryKey$;
+
+            DataSet ds = DbHelperSQL.RunProcedure("$GetSingleProcName$", parameters, "pagetable");
+
+            $EntityName$ model = new $EntityName$();
+
+            if (ds.Tables[0].Rows.Count == 1)
+            {
+                var dataRow = ds.Tables[0].Rows[0];
+
+                $ToSingleModel$
+
+                return model;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Other
+
+        /// <summary>
+        /// 是否存在该$ChinaComment$记录
+        /// </summary>
+        /// <param name="$PrimaryKey$">$PrimaryKeyDesc$</param>
+        /// <returns>是否存在该$ChinaComment$记录</returns>
+        public bool Exists(string $PrimaryKey$, int? id = null)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("SELECT COUNT(1) FROM $TableName$");
+            strSql.Append(" WHERE ");
+            strSql.Append("  $PrimaryKey$ = @$PrimaryKey$  ");
+			if (id != null)
+            {
+                strSql.Append("  AND  id <> " + id.ToString());
+            }
+            SqlParameter[] parameters = {
+                    new SqlParameter("@$PrimaryKey$", SqlDbType.NVarChar,50)           };
+            parameters[0].Value = $PrimaryKey$;
+
+            return DbHelperSQL.Exists(strSql.ToString(), parameters);
+        }
+
+        #endregion
+
+    }
+}
+
+

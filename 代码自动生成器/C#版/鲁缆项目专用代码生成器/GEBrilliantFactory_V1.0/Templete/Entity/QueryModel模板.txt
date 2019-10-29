@@ -1,0 +1,14 @@
+using System;
+using System.Runtime.Serialization;
+
+namespace $namespace_model$
+{
+    /// <summary>
+    /// ≤È—Ø$ChinaComment$¿‡
+    /// </summary>
+	[DataContract]
+    public class Query$Modulelogo$Param : PageModel
+    {
+        $QueryAttributes$
+    }
+}

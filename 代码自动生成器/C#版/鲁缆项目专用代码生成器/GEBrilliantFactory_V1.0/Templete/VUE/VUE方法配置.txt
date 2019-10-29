@@ -1,0 +1,55 @@
+// 获取$ChinaComment$分页列表
+export function get$Modulelogo$List (data) {
+  return service({
+    method: 'post',
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
+    data: data,
+    url: '/$RoutePrefix$/get$Modulelogo$List',
+	baseURL: config.wip_domain,
+    timeout: defaultTimeout
+  })
+}
+// 获取单个$ChinaComment$
+export function getSingle$Modulelogo$ (data) {
+  return service({
+    method: 'post',
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
+    data: data,
+    url: '/$RoutePrefix$/getSingle$Modulelogo$',
+	baseURL: config.wip_domain,
+    timeout: defaultTimeout
+  })
+}
+// 更新$ChinaComment$
+export function update$Modulelogo$ (data) {
+  return service({
+    method: 'post',
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
+    data: data,
+    url: '/$RoutePrefix$/update$Modulelogo$',
+	baseURL: config.wip_domain,
+    timeout: defaultTimeout
+  })
+}
+// 新增$ChinaComment$
+export function insert$Modulelogo$ (data) {
+  return service({
+    method: 'post',
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
+    data: data,
+    url: '/$RoutePrefix$/insert$Modulelogo$',
+	baseURL: config.wip_domain,
+    timeout: defaultTimeout
+  })
+}
+// 禁启用$ChinaComment$
+export function enable$Modulelogo$ (data) {
+  return service({
+    method: 'post',
+    headers: {'Content-Type': 'application/json;charset=UTF-8'},
+    data: data,
+    url: '/$RoutePrefix$/enable$Modulelogo$',
+	baseURL: config.wip_domain,
+    timeout: defaultTimeout
+  })
+}
