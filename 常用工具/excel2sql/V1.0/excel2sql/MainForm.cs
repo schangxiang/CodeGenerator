@@ -22,6 +22,7 @@ namespace Excel2SQL
             this.tb_FilePath.Text = @"C:\Users\Administrator\Desktop\新建文件夹\建表模板示例.xlsx";
             this.tb_Author.Text = "shaocx";
             this.tb_PrimaryKey.Text = "id";
+            this.tb_MS.Text = "dbo";
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -77,7 +78,7 @@ namespace Excel2SQL
                 {
                     primaryKey = "id";
                 }
-                
+
 
                 Dictionary<string, string> cellheader = new Dictionary<string, string> {
                     { "OrderNo", "序号" },
@@ -91,15 +92,25 @@ namespace Excel2SQL
                 // 1.2解析文件，存放到一个List集合里
                 StringBuilder errorMsg = new StringBuilder(); // 错误信息
                 string tableDesc = "", tableName = "";
-                List<ColumnEntity> enlist = ExcelHelper.ExcelToEntityListForCreateTable<ColumnEntity>(cellheader, filePath,out tableDesc,out tableName, out errorMsg);
+                List<ColumnEntity> enlist = ExcelHelper.ExcelToEntityListForCreateTable<ColumnEntity>(cellheader, filePath, out tableDesc, out tableName, out errorMsg);
                 if (!string.IsNullOrEmpty(errorMsg.ToString()))
                 {
                     MessageBox.Show("错误:" + errorMsg.ToString());
                     return;
                 }
+                //解析tableName，如果存在逗号，说明是有Schema的
+                if (tableName.IndexOf('.') > -1)
+                {
+                    string[] arr = tableName.Split('.');
+                    this.tb_MS.Text = arr[0];
+                    this.tb_TableName.Text = arr[1];
+                    SystemData.TableNameWithNoSchema = arr[1];
+                }
                 if (enlist != null && enlist.Count > 0)
                 {
                     string text = TextHelper.ReadText(@"Templete\建表模板.txt");
+                    text = text.Replace("$TableNameWithNoSchema$",SystemData.TableNameWithNoSchema);
+                    text = text.Replace("$Schema$", this.tb_MS.Text);
                     text = text.Replace("$TableName$", tableName);
                     text = text.Replace("$TableChinaDesc$", tableDesc);
                     text = text.Replace("$Author$", author);
@@ -107,7 +118,10 @@ namespace Excel2SQL
                     text = text.Replace("$PrimaryKey$", primaryKey);
                     text = text.Replace("$ColumnListStr$", Common.GetStrForColumnListStr(enlist, primaryKey));
                     text = text.Replace("$UniqueIndex$", Common.GetUniqueIndex(tableName, unqiueIndex));
-                    text = text.Replace("$ColumnsAnnotation$", Common.GetColumnsAnnotation(tableName, primaryKey, enlist));
+                    text = text.Replace("$ColumnsAnnotation$", Common.GetColumnsAnnotation(tableName, primaryKey, this.tb_MS.Text, enlist));
+
+
+
 
                     string createFilePath = @"D:\\C#AutoCreateCodeFile\Excel2SQL";
                     TextHelper.CreateFile(createFilePath, tableName + ".sql", text);

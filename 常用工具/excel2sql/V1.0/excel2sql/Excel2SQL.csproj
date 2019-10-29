@@ -78,6 +78,7 @@
     <Compile Include="InitCodeItemForm.Designer.cs">
       <DependentUpon>InitCodeItemForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SystemData.cs" />
     <Compile Include="Utility\ExcelHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

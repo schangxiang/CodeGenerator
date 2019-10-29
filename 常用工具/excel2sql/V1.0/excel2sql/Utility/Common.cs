@@ -106,7 +106,7 @@ namespace GenerateModel
         /// </summary>
         /// <param name="columnList"></param>
         /// <returns></returns>
-        public static string GetColumnsAnnotation(string tableName, string primaryKey, List<ColumnEntity> columnList)
+        public static string GetColumnsAnnotation(string tableName, string primaryKey, string schema, List<ColumnEntity> columnList)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace GenerateModel
                         continue;
                     if (item.ColumnName.ToUpper() == primaryKey.ToUpper())
                         continue;
-                    sb.Append("EXEC sys.sp_addextendedproperty @value=N'" + item.ChinaName + "' ,@level2name=N'" + item.ColumnName + "',@level1name=N'" + tableName + "',@name=N'MS_Description',  @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE' ,@level2type=N'COLUMN' \n");
+                    sb.Append("EXEC sys.sp_addextendedproperty @value=N'" + item.ChinaName + "' ,@level2name=N'" + item.ColumnName + "',@level1name=N'" + SystemData.TableNameWithNoSchema + "',@name=N'MS_Description',  @level0type=N'SCHEMA',@level0name=N'"+ schema + "', @level1type=N'TABLE' ,@level2type=N'COLUMN' \n");
                     sb.Append("GO \n");
                 }
 
