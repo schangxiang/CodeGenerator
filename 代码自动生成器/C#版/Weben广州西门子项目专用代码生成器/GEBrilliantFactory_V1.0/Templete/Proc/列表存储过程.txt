@@ -1,0 +1,34 @@
+IF EXISTS ( SELECT 1 FROM dbo.sysobjects WHERE id = object_id(N'[$GetListProcName$]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1)
+  DROP PROCEDURE [$GetListProcName$]
+GO
+------------------------------------
+--用途：获得$ChinaComment$数据列表
+--说明：
+--作者: $Author$
+--时间：$CurDate$
+------------------------------------
+CREATE PROCEDURE $GetListProcName$
+	@strWhere nvarchar(500) -- 查询条件
+AS 
+  DECLARE @strQueryCol nvarchar(max),
+          @strSql nvarchar(max)
+         
+
+  SET nocount ON;
+
+  SET @strQueryCol=' $strQueryCol$ '
+ 
+  SET @strSql= ' SELECT '+@strQueryCol
+              +' FROM $TableName$  AS $TableAlias$ WITH(NOLOCK) WHERE 1=1  '
+                       
+  IF(@strWhere <> '')
+	BEGIN 
+		SET @strSql=@strSql+' AND '+@strWhere
+	END
+
+  SET @strSql=@strSql+' ORDER BY $TableAlias$.$orderByName$ DESC '
+  EXEC SP_EXECUTESQL @strSql
+   
+  SET nocount OFF;
+GO
+

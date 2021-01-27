@@ -1,0 +1,14 @@
+USE GSiemens_LES
+GO
+------------------------------------ 
+--用途：初始化接口管理表-$ChinaComment$
+--说明： 
+--作者: $Author$ 
+--时间：$CurDate$ 
+------------------------------------ 
+INSERT INTO Modules ([IsDeleted], [Name], [LinkUrl], [Area], [Controller], [Action], [Icon], [Code], [OrderSort], [Description], [IsMenu], [Enabled], [CreateId], [CreateBy], [CreateTime], [ModifyId], [ModifyBy], [ModifyTime], [ParentId]) VALUES ('0', N'查询$ChinaComment$', N'/api/$TableName$/get', NULL, NULL, NULL, NULL, NULL, '0', NULL, '0', '1', '12', N'sys', GETDATE(), NULL, NULL,GETDATE(), '0');
+INSERT INTO Modules ([IsDeleted], [Name], [LinkUrl], [Area], [Controller], [Action], [Icon], [Code], [OrderSort], [Description], [IsMenu], [Enabled], [CreateId], [CreateBy], [CreateTime], [ModifyId], [ModifyBy], [ModifyTime], [ParentId]) VALUES ('0', N'新增$ChinaComment$', N'/api/$TableName$/post', NULL, NULL, NULL, NULL, NULL, '0', NULL, '0', '1', '12', N'sys', GETDATE(), NULL, NULL, GETDATE(), '0');
+INSERT INTO Modules ([IsDeleted], [Name], [LinkUrl], [Area], [Controller], [Action], [Icon], [Code], [OrderSort], [Description], [IsMenu], [Enabled], [CreateId], [CreateBy], [CreateTime], [ModifyId], [ModifyBy], [ModifyTime], [ParentId]) VALUES ('0', N'修改$ChinaComment$', N'/api/$TableName$/put', NULL, NULL, NULL, NULL, NULL, '0', NULL, '0', '1', '12', N'sys', GETDATE(), NULL, NULL, GETDATE(), '0');
+INSERT INTO Modules ([IsDeleted], [Name], [LinkUrl], [Area], [Controller], [Action], [Icon], [Code], [OrderSort], [Description], [IsMenu], [Enabled], [CreateId], [CreateBy], [CreateTime], [ModifyId], [ModifyBy], [ModifyTime], [ParentId]) VALUES ('0', N'删除$ChinaComment$', N'/api/$TableName$/delete', NULL, NULL, NULL, NULL, NULL, '0', NULL, '0', '1', '12', N'sys', GETDATE(), NULL, NULL, GETDATE(), '0');
+GO
+

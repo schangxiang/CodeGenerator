@@ -1,0 +1,17 @@
+IF EXISTS ( SELECT 1 FROM dbo.sysobjects WHERE id = object_id(N'[$UpdateProcName$]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1) 
+  DROP PROCEDURE [$UpdateProcName$] 
+GO 
+------------------------------------ 
+--用途：修改一条$ChinaComment$记录
+--说明： 
+--作者: $Author$ 
+--时间：$CurDate$ 
+------------------------------------ 
+CREATE PROCEDURE $UpdateProcName$
+	$update_cols_params$
+AS 
+	UPDATE [$TableName$] SET 
+	$update_cols_assignment$
+	WHERE $Primary$=@$Primary$ 
+
+GO

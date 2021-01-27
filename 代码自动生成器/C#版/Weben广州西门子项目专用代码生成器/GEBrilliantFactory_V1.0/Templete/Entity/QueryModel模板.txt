@@ -1,0 +1,10 @@
+namespace LES.Core.Model.ParamModels
+{
+    /// <summary>
+    /// ≤È—Ø$ChinaComment$¿‡
+    /// </summary>
+    public class $EntityName$Param : PageParam
+    {
+        $QueryAttributes$
+    }
+}

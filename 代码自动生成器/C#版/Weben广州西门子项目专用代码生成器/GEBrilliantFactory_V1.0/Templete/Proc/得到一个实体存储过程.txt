@@ -1,0 +1,19 @@
+IF EXISTS ( SELECT 1 FROM dbo.sysobjects WHERE id = object_id(N'[$GetSingleProcName$]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1) 
+  DROP PROCEDURE [$GetSingleProcName$] 
+GO 
+------------------------------------ 
+--用途：得到一个$ChinaComment$实体
+--说明： 
+--作者: $Author$ 
+--时间：$CurDate$ 
+------------------------------------ 
+CREATE PROCEDURE $GetSingleProcName$ 
+	@$Primary$ $DataType$	
+AS  
+  SET nocount ON; 
+  
+  SELECT $strQueryCol$
+  FROM $TableName$  AS $TableAlias$ WITH(NOLOCK) WHERE $Primary$=@$Primary$
+   
+  SET nocount OFF; 
+GO 

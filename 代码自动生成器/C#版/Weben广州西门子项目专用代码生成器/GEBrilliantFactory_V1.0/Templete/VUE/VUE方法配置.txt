@@ -1,0 +1,13 @@
+// ÅäÖÃ$ChinaComment$·½·¨
+export const get$Modulelogo$ListPage = params => {
+    return axios.post(`${base}/api/Base_$Modulelogo$/get`, params);
+};
+export const remove$Modulelogo$ = params => {
+    return axios.delete(`${base}/api/Base_$Modulelogo$/delete`, { params: params });
+};
+export const edit$Modulelogo$ = params => {
+    return axios.put(`${base}/api/Base_$Modulelogo$/put`, params);
+};
+export const add$Modulelogo$ = params => {
+    return axios.post(`${base}/api/Base_$Modulelogo$/post`, params);
+};

@@ -1,0 +1,21 @@
+IF EXISTS ( SELECT 1 FROM dbo.sysobjects WHERE id = object_id(N'[$AddProcName$]') AND OBJECTPROPERTY(id, N'IsProcedure') = 1) 
+  DROP PROCEDURE [$AddProcName$] 
+GO 
+------------------------------------ 
+--用途：增加一条$ChinaComment$记录
+--说明： 
+--作者: $Author$ 
+--时间：$CurDate$ 
+------------------------------------ 
+CREATE PROCEDURE $AddProcName$
+	@id int output,
+	$insert_cols_params$
+AS 
+	INSERT INTO [$TableName$](
+	$insert_cols$
+	)VALUES(
+	$insert_cols_values$
+	)
+	SET @id = @@IDENTITY
+	RETURN @id
+GO
