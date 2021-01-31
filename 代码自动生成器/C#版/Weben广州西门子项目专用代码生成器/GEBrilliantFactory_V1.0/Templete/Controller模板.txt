@@ -1,12 +1,12 @@
 using LES.Core.Common.HttpContextUser;
+using LES.Core.Extensions.Others;
 using LES.Core.IServices;
 using LES.Core.Model;
 using LES.Core.Model.Models;
 using LES.Core.Model.ParamModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq.Expressions;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LES.Core.Api.Controllers
@@ -40,16 +40,22 @@ namespace LES.Core.Api.Controllers
             {
                 param.searchVal = string.Empty;
             }
-            //这里写筛选条件
-            Expression<Func<$EntityName$, bool>> whereExpression = a => a.Id > 0
-            //模糊查询
-			$PageSearchFilter$
-
+            
+            var whereConditions=WhereConditionsExtensions.GetWhereConditions<$EntityName$, $EntityName$Param>(param);
+            if (!whereConditions.IsSuccess) {
+                return new MessageModel<PageModel<Role>>()
+                {
+                    msg = whereConditions.ErrMsg,
+                    success = false,
+                    response = null
+                };
+            }
+			var data = await _roleServices.QueryPage(whereConditions.data, param.page, param.pageSize, " Id desc ");
             return new MessageModel<PageModel<$EntityName$>>()
             {
                 msg = "获取成功",
                 success = true,
-                response = await _$EntityName$Services.QueryPage(whereExpression, param.page, param.pageSize)
+                response = data
             };
 
         }

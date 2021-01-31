@@ -1,3 +1,6 @@
+using LES.Core.Common;
+using System.Collections.Generic;
+
 namespace LES.Core.Model.ParamModels
 {
     /// <summary>

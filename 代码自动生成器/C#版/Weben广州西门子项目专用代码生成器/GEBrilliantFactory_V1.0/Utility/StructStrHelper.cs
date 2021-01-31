@@ -220,6 +220,13 @@ where obj.name='" + tableName + "'  ";
                 DataTypeEnum myDataType = (DataTypeEnum)Enum.Parse(typeof(DataTypeEnum), "dt_" + columnModel.DataType);
                 switch (myDataType)
                 {
+                    case DataTypeEnum.dt_datetime:
+                    case DataTypeEnum.dt_datetime2:
+                        attrStr += "        //表示是 高级查询范围查询特性\n";
+                        attrStr += "        [HighSearchRangeAttribute]\n";
+                        attrStr += "        public List<String>" + str_NullFlag + attr + " { get; set; }\n";
+                        attrStr += "\n";//最后是加一个空格
+                        break;
                     case DataTypeEnum.dt_bigint:
                         attrStr += "        public long" + str_NullFlag + attr + " { get; set; }\n";
                         attrStr += "\n";//最后是加一个空格
@@ -233,6 +240,52 @@ where obj.name='" + tableName + "'  ";
                         attrStr += "\n";//最后是加一个空格
                         break;
                 }
+
+                return attrStr;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        /// <summary>
+        /// 生成属性字符串ForQueryModel
+        /// </summary>
+        /// <param name="columnModel"></param>
+        /// <returns></returns>
+        public static string GenerateAttributeForQueryModelMode(ColumnModel columnModel)
+        {
+            try
+            {
+                string attr = columnModel.ColumnName;
+                string str_NullFlag = " ";
+                string attrStr = "";
+                attrStr += "        /// <summary>\n";
+                attrStr += "        /// " + columnModel.Description + "-查询过滤模式 \n";
+                attrStr += "        /// </summary>\n";
+
+                DataTypeEnum myDataType = (DataTypeEnum)Enum.Parse(typeof(DataTypeEnum), "dt_" + columnModel.DataType);
+                switch (myDataType)
+                {
+                    case DataTypeEnum.dt_datetime:
+                    case DataTypeEnum.dt_datetime2:
+                        return "\n";
+                    case DataTypeEnum.dt_bigint:
+                        attrStr += "        public long" + str_NullFlag + attr + "Mode { get; set; }\n";
+                        attrStr += "\n";//最后是加一个空格
+                        break;
+                    case DataTypeEnum.dt_int:
+                        attrStr += "        public int" + str_NullFlag + attr + "Mode { get; set; }\n";
+                        attrStr += "\n";//最后是加一个空格
+                        break;
+                    default:
+                        attrStr += "        public string" + str_NullFlag + attr + "Mode { get; set; }\n";
+                        attrStr += "\n";//最后是加一个空格
+                        break;
+                }
+
                 return attrStr;
             }
             catch (Exception ex)
@@ -1111,6 +1164,17 @@ where obj.name='" + tableName + "'  ";
                     sb.Append("                { \n");
                     sb.Append("                   label: '" + columnModel.Description + "', \n");
                     sb.Append("                   prop: '" + columnModel.ColumnName + "', \n");
+
+                    //添加类型
+                    switch (enumDT)
+                    {
+                        case DataTypeEnum.dt_datetime:
+                            sb.Append("                   type: 'datetimerange', \n");
+                            break;
+                        default:
+                            break;
+                    }
+
                     sb.Append("                   element: '" + elment + "', \n");
                     sb.Append("                }, \n");
                 }
@@ -1159,7 +1223,7 @@ where obj.name='" + tableName + "'  ";
         /// </summary>
         /// <param name="columnModelList"></param>
         /// <returns></returns>
-        public static string GetVueSearchFormInputPlaceholderStr(List<ColumnModel> columnModelList)
+        public static string GetVueSearchFormInputPlaceholderStr(List<ColumnModel> columnModelList, ref string names)
         {
             StringBuilder sb = new StringBuilder();
             try
@@ -1170,11 +1234,15 @@ where obj.name='" + tableName + "'  ";
                     if (columnModel.IsPrimaryKey == false)
                     {
                         sb.Append("" + columnModel.Description + "/");
+                        names += "'" + columnModel.ColumnName + "',";
                     }
                 }
                 //去掉最后一个,
                 var res = sb.ToString();
                 res = res.Substring(0, res.Length - 1);
+
+                names = names.Substring(0, names.Length - 1);
+
                 return res;
             }
             catch (Exception ex)

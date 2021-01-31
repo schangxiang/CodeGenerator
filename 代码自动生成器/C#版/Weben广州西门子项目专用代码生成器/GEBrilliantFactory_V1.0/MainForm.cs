@@ -161,7 +161,7 @@ namespace GenerateCode_GEBrilliantFactory
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.VUE_FunConfig, filePrefixName, entityName, modulelogo);
 
                 //VUE文件
-                str_generate = VUE_Generate.CreateText(tableAlias, modulelogo, primaryKey, columnList);
+                str_generate = VUE_Generate.CreateText(tableAlias, modulelogo, primaryKey, columnList,chinaComment);
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.VUEFile, filePrefixName, entityName, modulelogo);
 
                 btn_InsertSql_Click(null, null);

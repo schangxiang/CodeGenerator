@@ -11,8 +11,12 @@
         </toolbar>
         <!-- 搜索 -->
         <SearchForm :formOptions="formOptions"
+                    :commonSearchOptionSet="commonSearchOptionSet"
                     :drawerSize="drawerSize"
+                    :labelWidth="labelWidth"
+                    :controlStyle="controlStyle"
                     :searchFormInputPlaceholder="searchFormInputPlaceholder"
+                    :searchFormInputAttrs="searchFormInputAttrs"
                     ref="ChildSearchForm"
                     @onSearch="get$Modulelogo$s" />
       </el-form>
@@ -99,8 +103,14 @@ export default {
       filterVal: [$VueExportFilterValArrayStr$],//当前页面列表的表头属性数组，导出用
 
       //搜索框相关
+	  commonSearchOptionSet: "模糊",//通用查询的默认配置,"模糊"或"精准"
+	  controlStyle: {//设置搜索控件的长度等样式
+        width: '300px',
+      },
+	  labelWidth: "90px",//显示Label的宽度
       drawerSize: "450px",//drawner宽度设置
       searchFormInputPlaceholder: '请输入$SearchFormInputPlaceholderStr$',//要给子搜索组件传递的值
+	  searchFormInputAttrs: [$SearchFormInputPlaceholderNameStr$],//要给子搜索组件传递的属性名
       formOptions: [
         $FormOptionsStr$
       ],

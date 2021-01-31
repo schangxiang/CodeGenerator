@@ -12,7 +12,7 @@ namespace GenerateCode_GEBrilliantFactory
     /// </summary>
     public class VUE_Generate
     {
-        public static string CreateText(string TableAlias, string modulelogo, string primaryKey, List<ColumnModel> columnNameList)
+        public static string CreateText(string TableAlias, string modulelogo, string primaryKey, List<ColumnModel> columnNameList, string ChinaComment)
         {
             var str = TextHelper.ReadText(@"Templete\VUE\VUE文件模板.txt");
 
@@ -23,10 +23,12 @@ namespace GenerateCode_GEBrilliantFactory
 
             str = str.Replace("$VueExportFilterValArrayStr$", StructStrHelper.GetVueExportFilterValArrayStr(columnNameList));
             str = str.Replace("$VueExportTHeaderArrayStr$", StructStrHelper.GetVueExportTHeaderArrayStr(columnNameList));
-            str = str.Replace("$SearchFormInputPlaceholderStr$", StructStrHelper.GetVueSearchFormInputPlaceholderStr(columnNameList));
+            var SearchFormInputPlaceholderNameStr = "";
+            str = str.Replace("$SearchFormInputPlaceholderStr$", StructStrHelper.GetVueSearchFormInputPlaceholderStr(columnNameList, ref SearchFormInputPlaceholderNameStr));
+            str = str.Replace("$SearchFormInputPlaceholderNameStr$", SearchFormInputPlaceholderNameStr);
             str = str.Replace("$FormOptionsStr$", StructStrHelper.GetVueFormOptionsStr(columnNameList));
 
-
+            str = str.Replace("$ChinaComment$", ChinaComment);//中文注释
 
 
             str = str.Replace("$Modulelogo$", modulelogo);//表别名(他一定要在最后替换)

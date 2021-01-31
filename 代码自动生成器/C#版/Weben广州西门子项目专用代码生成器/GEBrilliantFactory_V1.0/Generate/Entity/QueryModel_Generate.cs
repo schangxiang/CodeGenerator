@@ -28,6 +28,7 @@ namespace GenerateCode_GEBrilliantFactory
             for (int i = 0; i < newColumnNameList.Count; ++i)
             {
                 attrString += StructStrHelper.GenerateAttributeForQueryModel(newColumnNameList[i]);
+                attrString += StructStrHelper.GenerateAttributeForQueryModelMode(newColumnNameList[i]);
             }
             str_dal = str_dal.Replace("$QueryAttributes$", attrString);
            
