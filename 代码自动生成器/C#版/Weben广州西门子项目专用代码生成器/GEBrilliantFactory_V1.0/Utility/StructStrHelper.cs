@@ -224,15 +224,15 @@ where obj.name='" + tableName + "'  ";
                     case DataTypeEnum.dt_datetime2:
                         attrStr += "        //表示是 高级查询范围查询特性\n";
                         attrStr += "        [HighSearchRangeAttribute]\n";
-                        attrStr += "        public List<String>" + str_NullFlag + attr + " { get; set; }\n";
+                        attrStr += "        public List<string>" + str_NullFlag + attr + " { get; set; }\n";
                         attrStr += "\n";//最后是加一个空格
                         break;
                     case DataTypeEnum.dt_bigint:
-                        attrStr += "        public long" + str_NullFlag + attr + " { get; set; }\n";
+                        attrStr += "        public long?" + str_NullFlag + attr + " { get; set; }\n";
                         attrStr += "\n";//最后是加一个空格
                         break;
                     case DataTypeEnum.dt_int:
-                        attrStr += "        public int" + str_NullFlag + attr + " { get; set; }\n";
+                        attrStr += "        public int?" + str_NullFlag + attr + " { get; set; }\n";
                         attrStr += "\n";//最后是加一个空格
                         break;
                     default:
@@ -266,22 +266,16 @@ where obj.name='" + tableName + "'  ";
                 attrStr += "        /// " + columnModel.Description + "-查询过滤模式 \n";
                 attrStr += "        /// </summary>\n";
 
+                string highSearchModeSuffix = "_FilterMode";
+
                 DataTypeEnum myDataType = (DataTypeEnum)Enum.Parse(typeof(DataTypeEnum), "dt_" + columnModel.DataType);
                 switch (myDataType)
                 {
                     case DataTypeEnum.dt_datetime:
                     case DataTypeEnum.dt_datetime2:
                         return "\n";
-                    case DataTypeEnum.dt_bigint:
-                        attrStr += "        public long" + str_NullFlag + attr + "Mode { get; set; }\n";
-                        attrStr += "\n";//最后是加一个空格
-                        break;
-                    case DataTypeEnum.dt_int:
-                        attrStr += "        public int" + str_NullFlag + attr + "Mode { get; set; }\n";
-                        attrStr += "\n";//最后是加一个空格
-                        break;
                     default:
-                        attrStr += "        public string" + str_NullFlag + attr + "Mode { get; set; }\n";
+                        attrStr += "        public string" + str_NullFlag + attr + highSearchModeSuffix + " { get; set; }\n";
                         attrStr += "\n";//最后是加一个空格
                         break;
                 }
@@ -1054,7 +1048,7 @@ where obj.name='" + tableName + "'  ";
             StringBuilder sb = new StringBuilder();
             try
             {
-                List<ColumnModel> newList = ListHelper.RemoveId(columnModelList);
+                List<ColumnModel> newList = ListHelper.OnlyRemoveId(columnModelList);
                 foreach (var columnModel in newList)
                 {
                     DataTypeEnum enumDT = (DataTypeEnum)Enum.Parse(typeof(DataTypeEnum), "dt_" + columnModel.DataType.ToString());

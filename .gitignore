@@ -14,3 +14,7 @@
 /常用工具/ClassToJSON/V1.0/ClassToJSON/bin
 /常用工具/excel2sql/V1.0/excel2sql/obj
 /常用工具/ClassToJSON/V1.0/ClassToJSON/obj
+# 忽略obj文件和obj目录
+obj
+# 忽略bin文件和bin目录
+bin

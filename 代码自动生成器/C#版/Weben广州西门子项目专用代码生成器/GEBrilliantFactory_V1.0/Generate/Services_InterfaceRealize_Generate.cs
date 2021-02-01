@@ -8,15 +8,15 @@ using System.Text;
 namespace GenerateCode_GEBrilliantFactory
 {
     /// <summary>
-    /// 生成WCF的接口实现文件
+    /// 生成Services的接口实现文件
     /// </summary>
-    public class WCF_InterfaceRealize_Generate
+    public class Services_InterfaceRealize_Generate
     {
         public static string CreateText(string Wcf_NameSpacePath, string Modulelogo, string entityName,
             string ChinaComment,string filePrefixName,string primaryKey,string TableAlias,string addEntityParam,
             List<ColumnModel> columnList)
         {
-            var str = TextHelper.ReadText(@"Templete\WCF接口实现模板.txt");
+            var str = TextHelper.ReadText(@"Templete\Services接口实现模板.txt");
 
             str = str.Replace("$ValidateEmptyStrForPrimaryKey$", StructStrHelper.GetValidateEmptyStrForPrimaryKey(columnList, primaryKey));
             str = str.Replace("$Wcf_NameSpacePath$", Wcf_NameSpacePath);//WCF项目的命名空间

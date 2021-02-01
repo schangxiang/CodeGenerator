@@ -187,15 +187,22 @@ export default {
       }
       return para
     },
-    //获取码表集列表
+    //获取列表
     get$Modulelogo$s (formValue) {
       //this.total = 0
       //this.$Modulelogo$s = null
       let para = this.getPostParam('1');
       this.listLoading = true;
       get$Modulelogo$ListPage(para).then((res) => {
-        this.total = res.data.response.dataCount;
-        this.$Modulelogo$s = res.data.response.data;
+	    if (res.data.success) {
+          this.total = res.data.response.dataCount;
+          this.$Modulelogo$s = res.data.response.data;
+        } else {
+          this.$message({
+            message: res.data.msg,
+            type: 'error'
+          });
+        }
         this.listLoading = false;
       });
     },

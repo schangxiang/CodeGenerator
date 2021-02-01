@@ -70,9 +70,9 @@
     <Compile Include="Generate\Entity\AddModel_Generate.cs" />
     <Compile Include="Generate\InsertSQL_Generate.cs" />
     <Compile Include="Generate\VUE\VUE_Generate.cs" />
-    <Compile Include="Generate\WCF_InterfaceRealize_Generate.cs" />
+    <Compile Include="Generate\Services_InterfaceRealize_Generate.cs" />
     <Compile Include="Generate\VUE\VUE_FunConfig_Generate.cs" />
-    <Compile Include="Generate\WCF_Interface_Generate.cs" />
+    <Compile Include="Generate\Services_Interface_Generate.cs" />
     <Compile Include="Generate\Entity\QueryModel_Generate.cs" />
     <Compile Include="Generate\BLL_Generate.cs" />
     <Compile Include="Generate\DAL_Generate.cs" />
@@ -159,13 +159,13 @@
     <Content Include="Templete\VUE\VUE文件模板.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templete\WCF接口实现模板.txt">
+    <Content Include="Templete\Services接口实现模板.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templete\VUE\VUE方法配置.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Templete\WCF接口模板.txt">
+    <Content Include="Templete\Services接口模板.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Templete\Entity\QueryModel模板.txt">

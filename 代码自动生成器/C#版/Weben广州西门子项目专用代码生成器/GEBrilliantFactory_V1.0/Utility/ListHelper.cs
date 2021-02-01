@@ -118,7 +118,7 @@ namespace GenerateCode_GEBrilliantFactory
         /// </summary>
         /// <param name="columnNameList"></param>
         /// <returns></returns>
-        public static List<ColumnModel> RemoveId(List<ColumnModel> columnNameList)
+        public static List<ColumnModel> OnlyRemoveId(List<ColumnModel> columnNameList)
         {
             List<ColumnModel> newList = new List<ColumnModel>();
             ColumnModel columnModel = null;

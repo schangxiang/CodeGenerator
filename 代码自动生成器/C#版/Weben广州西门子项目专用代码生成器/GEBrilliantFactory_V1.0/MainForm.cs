@@ -18,7 +18,7 @@ namespace GenerateCode_GEBrilliantFactory
 
             this.tb_Primary.Text = "id";//主键名
             this.tb_PrimaryDesc.Text = "主键";
-            this.tb_OrderBy.Text = "LastModifyTime";//排序字段
+            this.tb_OrderBy.Text = "ModifyTime";//排序字段
 
             this.tb_TableName.Text = "Base_Xiangzi";//表名
             this.tb_WCF_NameSpacePath.Text = "WIP_";//WCF项目命名空间 
@@ -118,8 +118,18 @@ namespace GenerateCode_GEBrilliantFactory
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.QueryModel, filePrefixName, entityName, modulelogo);
 
                 //生成Controller文件
-                str_generate = Controller_Generate.CreateText(modulelogo, chinaComment, columnList, entityName);
+                str_generate = Controller_Generate.CreateText(modulelogo, chinaComment, columnList, entityName, orderByName);
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.Controller, filePrefixName, entityName, modulelogo);
+
+                //生成Services接口文件
+                str_generate = Services_Interface_Generate.CreateText(wcf_NameSpacePath, modulelogo, entityName, chinaComment, addEntityParam);
+                tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.WCF_InterFace, filePrefixName, entityName, modulelogo);
+
+
+                //生成Services接口实现文件
+                str_generate = Services_InterfaceRealize_Generate.CreateText(wcf_NameSpacePath, modulelogo,
+                    entityName, chinaComment, filePrefixName, primaryKey, tableAlias, addEntityParam, columnList);
+                tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.WCF_InterFaceRealize, filePrefixName, entityName, modulelogo);
 
                 /*
                 //生成存储过程文件
@@ -144,15 +154,7 @@ namespace GenerateCode_GEBrilliantFactory
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.AddModelParam, filePrefixName, entityName, modulelogo);
 
 
-                //生成WCF接口文件
-                str_generate = WCF_Interface_Generate.CreateText(wcf_NameSpacePath, modulelogo, entityName, chinaComment, addEntityParam);
-                tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.WCF_InterFace, filePrefixName, entityName, modulelogo);
-
-
-                //生成WCF接口实现文件
-                str_generate = WCF_InterfaceRealize_Generate.CreateText(wcf_NameSpacePath, modulelogo,
-                    entityName, chinaComment, filePrefixName, primaryKey, tableAlias, addEntityParam, columnList);
-                tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.WCF_InterFaceRealize, filePrefixName, entityName, modulelogo);
+              
 
                 //*/
 
@@ -161,7 +163,7 @@ namespace GenerateCode_GEBrilliantFactory
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.VUE_FunConfig, filePrefixName, entityName, modulelogo);
 
                 //VUE文件
-                str_generate = VUE_Generate.CreateText(tableAlias, modulelogo, primaryKey, columnList,chinaComment);
+                str_generate = VUE_Generate.CreateText(tableAlias, modulelogo, primaryKey, columnList, chinaComment);
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.VUEFile, filePrefixName, entityName, modulelogo);
 
                 btn_InsertSql_Click(null, null);
@@ -225,6 +227,11 @@ namespace GenerateCode_GEBrilliantFactory
                     var moule_str = tableName.Substring(index + 1, tableName.Length - index - 1);
                     this.tb_Modulelogo.Text = moule_str;
                     this.tb_EntityProName.Text = CommonHelper.TitleToLower(moule_str);
+                }
+                else
+                {
+                    this.tb_Modulelogo.Text = tableName;
+                    this.tb_EntityProName.Text = CommonHelper.TitleToLower(tableName);
                 }
             }
         }

@@ -1,0 +1,21 @@
+
+using LES.Core.IServices;
+using LES.Core.Model.Models;
+using LES.Core.Services.BASE;
+using LES.Core.IRepository.Base;
+
+namespace LES.Core.Services
+{
+    /// <summary>
+	/// $ChinaComment$服务接口实现
+	/// </summary>	
+    public class $EntityName$Services : BaseServices<$EntityName$>, I$EntityName$Services
+    {
+        private readonly IBaseRepository<$EntityName$> _dal;
+        public $EntityName$Services(IBaseRepository<$EntityName$> dal)
+        {
+            this._dal = dal;
+            base.BaseDal = dal;
+        }
+    }
+}

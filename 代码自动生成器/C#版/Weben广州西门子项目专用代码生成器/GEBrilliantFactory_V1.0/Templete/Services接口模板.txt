@@ -1,0 +1,12 @@
+using LES.Core.IServices.BASE;
+using LES.Core.Model.Models;
+
+namespace LES.Core.IServices
+{	
+	/// <summary>
+	/// $ChinaComment$服务接口
+	/// </summary>	
+    public interface I$EntityName$Services :IBaseServices<$EntityName$>
+	{
+    }
+}

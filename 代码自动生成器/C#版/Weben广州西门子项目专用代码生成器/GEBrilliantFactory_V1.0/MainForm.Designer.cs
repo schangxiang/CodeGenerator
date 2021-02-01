@@ -147,7 +147,7 @@
             // 
             // tb_WCF_NameSpacePath
             // 
-            this.tb_WCF_NameSpacePath.Location = new System.Drawing.Point(303, 288);
+            this.tb_WCF_NameSpacePath.Location = new System.Drawing.Point(831, 391);
             this.tb_WCF_NameSpacePath.Margin = new System.Windows.Forms.Padding(4);
             this.tb_WCF_NameSpacePath.Name = "tb_WCF_NameSpacePath";
             this.tb_WCF_NameSpacePath.Size = new System.Drawing.Size(261, 25);
@@ -156,7 +156,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 288);
+            this.label2.Location = new System.Drawing.Point(687, 394);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(129, 15);
@@ -165,7 +165,7 @@
             // 
             // tb_ChinaComment
             // 
-            this.tb_ChinaComment.Location = new System.Drawing.Point(303, 345);
+            this.tb_ChinaComment.Location = new System.Drawing.Point(305, 324);
             this.tb_ChinaComment.Margin = new System.Windows.Forms.Padding(4);
             this.tb_ChinaComment.Name = "tb_ChinaComment";
             this.tb_ChinaComment.Size = new System.Drawing.Size(261, 25);
@@ -174,7 +174,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 345);
+            this.label4.Location = new System.Drawing.Point(45, 324);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 15);
@@ -183,7 +183,7 @@
             // 
             // tb_CreatePerson
             // 
-            this.tb_CreatePerson.Location = new System.Drawing.Point(303, 402);
+            this.tb_CreatePerson.Location = new System.Drawing.Point(305, 381);
             this.tb_CreatePerson.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CreatePerson.Name = "tb_CreatePerson";
             this.tb_CreatePerson.Size = new System.Drawing.Size(264, 25);
@@ -192,7 +192,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(43, 414);
+            this.label5.Location = new System.Drawing.Point(45, 393);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(135, 15);
@@ -331,7 +331,7 @@
             // 
             // tb_RoutePrefix
             // 
-            this.tb_RoutePrefix.Location = new System.Drawing.Point(735, 222);
+            this.tb_RoutePrefix.Location = new System.Drawing.Point(797, 428);
             this.tb_RoutePrefix.Margin = new System.Windows.Forms.Padding(4);
             this.tb_RoutePrefix.Name = "tb_RoutePrefix";
             this.tb_RoutePrefix.Size = new System.Drawing.Size(192, 25);
@@ -341,7 +341,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(635, 230);
+            this.label13.Location = new System.Drawing.Point(697, 436);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(99, 15);

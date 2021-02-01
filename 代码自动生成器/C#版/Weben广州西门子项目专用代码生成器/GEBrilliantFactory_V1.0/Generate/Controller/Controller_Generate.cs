@@ -13,17 +13,18 @@ namespace GenerateCode_GEBrilliantFactory
     public class Controller_Generate
     {
         public static string CreateText(string Modulelogo,
-            string ChinaComment, List<ColumnModel> columnNameList, string entityName)
+            string ChinaComment, List<ColumnModel> columnNameList, string entityName, string orderByName = "")
         {
             var str_dal = TextHelper.ReadText(@"Templete\Controller模板.txt");
 
             str_dal = str_dal.Replace("$ChinaComment$", ChinaComment);//中文注释
             str_dal = str_dal.Replace("$EntityName$", entityName);
             str_dal = str_dal.Replace("$Modulelogo$", Modulelogo);//模块简写
+            str_dal = str_dal.Replace("$OrderByName$", orderByName == "" ? "Id" : orderByName);//模块简写
 
-            string attrString = "";
 
-            var str=StructStrHelper.GetPageFilterStrForController(columnNameList);
+
+            var str = StructStrHelper.GetPageFilterStrForController(columnNameList);
             str_dal = str_dal.Replace("$PageSearchFilter$", str);
 
             return str_dal;

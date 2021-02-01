@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace LES.Core.Api.Controllers
 {
@@ -41,16 +42,16 @@ namespace LES.Core.Api.Controllers
                 param.searchVal = string.Empty;
             }
             
-            var whereConditions=WhereConditionsExtensions.GetWhereConditions<$EntityName$, $EntityName$Param>(param);
+            var whereConditions = WhereConditionsExtensions.GetWhereConditions<$EntityName$, $EntityName$Param>(param);
             if (!whereConditions.IsSuccess) {
-                return new MessageModel<PageModel<Role>>()
+                return new MessageModel<PageModel<$EntityName$>>()
                 {
                     msg = whereConditions.ErrMsg,
                     success = false,
                     response = null
                 };
             }
-			var data = await _roleServices.QueryPage(whereConditions.data, param.page, param.pageSize, " Id desc ");
+			var data = await _$EntityName$Services.QueryPage(whereConditions.data, param.page, param.pageSize, " $OrderByName$ desc ");
             return new MessageModel<PageModel<$EntityName$>>()
             {
                 msg = "获取成功",
@@ -140,8 +141,33 @@ namespace LES.Core.Api.Controllers
             if (id > 0)
             {
                 var detail = await _$EntityName$Services.QueryById(id);
+                if (detail != null)
+                {
+                    data.success = await _$EntityName$Services.DeleteById(detail.Id);
+                    if (data.success)
+                    {
+                        data.msg = "删除成功";
+                        data.response = detail?.Id.ObjToString();
+                    }
+                }
+            }
 
-                detail.ModifyTime = DateTime.Now;
+            return data;
+        }
+
+		/// <summary>
+        /// 逻辑删除$ChinaComment$
+        /// </summary>
+        /// <param name="id">主键</param>
+        /// <returns>删除结果</returns>
+        [HttpDelete]
+        public async Task<MessageModel<string>> LogicDelete(int id = 0)
+        {
+            var data = new MessageModel<string>();
+            if (id > 0)
+            {
+                var detail = await _$EntityName$Services.QueryById(id);
+				detail.ModifyTime = DateTime.Now;
                 detail.ModifyBy = _user.Name;
                 detail.ModifyId = _user.ID;
                 detail.IsDeleted = true;
