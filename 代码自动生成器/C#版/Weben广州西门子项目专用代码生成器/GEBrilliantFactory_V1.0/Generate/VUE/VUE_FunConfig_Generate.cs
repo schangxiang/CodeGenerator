@@ -19,13 +19,15 @@ namespace GenerateCode_GEBrilliantFactory
         /// <param name="routePrefix">WCF路由前缀</param>
         /// <returns></returns>
         public static string CreateText(string Modulelogo,
-            string ChinaComment, string routePrefix)
+            string ChinaComment, string routePrefix,string entityName)
         {
             var str = TextHelper.ReadText(@"Templete\VUE\VUE方法配置.txt");
 
             str = str.Replace("$ChinaComment$", ChinaComment);//中文注释
             str = str.Replace("$Modulelogo$", Modulelogo);//模块简写
             str = str.Replace("$RoutePrefix$", routePrefix);//模块简写
+            str = str.Replace("$EntityName$", entityName);//模块简写
+
 
             return str;
         }

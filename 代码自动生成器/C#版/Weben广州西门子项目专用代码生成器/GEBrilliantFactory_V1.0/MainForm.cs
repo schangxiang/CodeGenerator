@@ -159,7 +159,7 @@ namespace GenerateCode_GEBrilliantFactory
                 //*/
 
                 //VUE方法配置
-                str_generate = VUE_FunConfig_Generate.CreateText(modulelogo, chinaComment, routePrefix);
+                str_generate = VUE_FunConfig_Generate.CreateText(modulelogo, chinaComment, routePrefix, entityName);
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.VUE_FunConfig, filePrefixName, entityName, modulelogo);
 
                 //VUE文件

@@ -1,13 +1,17 @@
 // 配置$ChinaComment$方法
+//分页获取$ChinaComment$列表
 export const get$Modulelogo$ListPage = params => {
-    return axios.post(`${base}/api/Base_$Modulelogo$/get`, params);
+    return axios.post(`${base}/api/$EntityName$/get`, params);
 };
+//删除$ChinaComment$
 export const remove$Modulelogo$ = params => {
-    return axios.delete(`${base}/api/Base_$Modulelogo$/delete`, { params: params });
+    return axios.delete(`${base}/api/$EntityName$/delete`, { params: params });
 };
+//编辑$ChinaComment$
 export const edit$Modulelogo$ = params => {
-    return axios.put(`${base}/api/Base_$Modulelogo$/put`, params);
+    return axios.put(`${base}/api/$EntityName$/put`, params);
 };
+//添加$ChinaComment$
 export const add$Modulelogo$ = params => {
-    return axios.post(`${base}/api/Base_$Modulelogo$/post`, params);
+    return axios.post(`${base}/api/$EntityName$/post`, params);
 };
