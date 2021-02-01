@@ -24,7 +24,7 @@
 
     <!--ап╠М-->
     <el-table :data="$Modulelogo$s"
-              :height="tableHeight"
+              :max-height="tableHeight"
               highlight-current-row
               size="small"
               @current-change="selectCurrentRow"
