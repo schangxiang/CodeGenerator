@@ -27,6 +27,7 @@
               :max-height="tableHeight"
               highlight-current-row
               size="small"
+			  :height="tableHeight"
               @current-change="selectCurrentRow"
               v-loading="listLoading"
               @selection-change="selsChange"
@@ -133,7 +134,7 @@ export default {
       ],
 
 	  isShowOperatorColumn: true,// 是否显示【操作】列,true显示 false不显示
-      tableHeight: window.innerHeight - 230, // 500, // 这个值不能设置小了，设置小了，界面就不对了
+      tableHeight: window.innerHeight - 180, // 控制表格的高度
 
       isAdd: false, // 是否是新增
       dialogTitle: '',
