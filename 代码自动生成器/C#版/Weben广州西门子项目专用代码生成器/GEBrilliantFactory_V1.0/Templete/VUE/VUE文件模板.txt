@@ -108,7 +108,7 @@ export default {
         width: '300px',
       },
 	  labelWidth: "90px",//显示Label的宽度
-      drawerSize: "450px",//drawner宽度设置
+      drawerSize: "550px",//drawner宽度设置
       searchFormInputPlaceholder: '请输入$SearchFormInputPlaceholderStr$',//要给子搜索组件传递的值
 	  searchFormInputAttrs: [$SearchFormInputPlaceholderNameStr$],//要给子搜索组件传递的属性名
       formOptions: [

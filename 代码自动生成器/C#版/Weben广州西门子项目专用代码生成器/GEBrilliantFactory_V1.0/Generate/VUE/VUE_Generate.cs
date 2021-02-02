@@ -18,14 +18,21 @@ namespace GenerateCode_GEBrilliantFactory
 
 
             str = str.Replace("$el-table-column$", StructStrHelper.GetElTableColumnStr(columnNameList));//列表项
+
             str = str.Replace("$el-item$", StructStrHelper.GetElFormItemStr(columnNameList));
             str = str.Replace("$el-form-itemForSearch$", StructStrHelper.GetElFormItemForSearchStr(columnNameList));
 
+            //导出字符串
             str = str.Replace("$VueExportFilterValArrayStr$", StructStrHelper.GetVueExportFilterValArrayStr(columnNameList));
             str = str.Replace("$VueExportTHeaderArrayStr$", StructStrHelper.GetVueExportTHeaderArrayStr(columnNameList));
+
+
+            //公共查询的列
             var SearchFormInputPlaceholderNameStr = "";
             str = str.Replace("$SearchFormInputPlaceholderStr$", StructStrHelper.GetVueSearchFormInputPlaceholderStr(columnNameList, ref SearchFormInputPlaceholderNameStr));
             str = str.Replace("$SearchFormInputPlaceholderNameStr$", SearchFormInputPlaceholderNameStr);
+
+            //高级查询
             str = str.Replace("$FormOptionsStr$", StructStrHelper.GetVueFormOptionsStr(columnNameList));
 
             str = str.Replace("$ChinaComment$", ChinaComment);//中文注释

@@ -1048,7 +1048,7 @@ where obj.name='" + tableName + "'  ";
             StringBuilder sb = new StringBuilder();
             try
             {
-                List<ColumnModel> newList = ListHelper.OnlyRemoveId(columnModelList);
+                List<ColumnModel> newList = ListHelper.RemoveIdOperationRemarkCreateIdModifyId(columnModelList);
                 foreach (var columnModel in newList)
                 {
                     DataTypeEnum enumDT = (DataTypeEnum)Enum.Parse(typeof(DataTypeEnum), "dt_" + columnModel.DataType.ToString());
@@ -1123,7 +1123,7 @@ where obj.name='" + tableName + "'  ";
 
 
         /// <summary>
-        /// 获取VUE formOptions字符串
+        /// 获取VUE formOptions字符串(高级查询中的)
         /// </summary>
         /// <param name="columnModelList"></param>
         /// <returns></returns>
@@ -1139,7 +1139,7 @@ where obj.name='" + tableName + "'  ";
                          element: 'el-input'
                   },
                  */
-                List<ColumnModel> newList = ListHelper.RemoveIdCreatorModifier(columnModelList);
+                List<ColumnModel> newList = ListHelper.RemoveIdOperationRemarkCreateIdModifyId(columnModelList);
                 foreach (var columnModel in newList)
                 {
                     DataTypeEnum enumDT = (DataTypeEnum)Enum.Parse(typeof(DataTypeEnum), "dt_" + columnModel.DataType.ToString());
@@ -1193,7 +1193,7 @@ where obj.name='" + tableName + "'  ";
             StringBuilder sb = new StringBuilder();
             try
             {
-                List<ColumnModel> newList = ListHelper.RemoveIdCreatorModifier(columnModelList);
+                List<ColumnModel> newList = ListHelper.RemoveIdOperationRemarkCreateIdModifyId(columnModelList);
                 foreach (var columnModel in newList)
                 {
                     if (columnModel.IsPrimaryKey == false)
@@ -1222,7 +1222,7 @@ where obj.name='" + tableName + "'  ";
             StringBuilder sb = new StringBuilder();
             try
             {
-                List<ColumnModel> newList = ListHelper.RemoveIdCreatorModifier(columnModelList);
+                List<ColumnModel> newList = ListHelper.OnlyStringProValue(columnModelList);
                 foreach (var columnModel in newList)
                 {
                     if (columnModel.IsPrimaryKey == false)
@@ -1255,7 +1255,7 @@ where obj.name='" + tableName + "'  ";
             StringBuilder sb = new StringBuilder();
             try
             {
-                List<ColumnModel> newList = ListHelper.RemoveIdCreatorModifier(columnModelList);
+                List<ColumnModel> newList = ListHelper.RemoveIdOperationRemarkCreateIdModifyId(columnModelList);
                 foreach (var columnModel in newList)
                 {
                     if (columnModel.IsPrimaryKey == false)
