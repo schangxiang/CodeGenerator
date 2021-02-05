@@ -41,6 +41,7 @@
       </el-table-column>
       $el-table-column$
 	  <el-table-column label="²Ù×÷"
+					   fixed="right"
 	                   width="180"
                        v-if="isShowOperatorColumn">
         <template scope="scope">
