@@ -13,7 +13,7 @@ using System;
 namespace LES.Core.Api.Controllers
 {
     /// <summary>
-    /// $ChinaComment$¿ØÖÆÆ÷
+    /// $ChinaComment$
     /// </summary>
     [Route("api/[controller]/[action]")]
     [ApiController]
