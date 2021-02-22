@@ -94,10 +94,10 @@
     </el-dialog>
     <!-- 导出组件 -->
     <ToolbarExport ref="cmToolbarExport"
-                   :exportFileName="exportFileName"
-                   :filterVal="filterVal"
-                   :currentPageData="currentPageData"
-                   :tHeader="tHeader" />
+                   :exportFileName="export_exportFileName"
+                   :filterVal="export_filterVal"
+                   :currentPageData="export_currentPageData"
+                   :tHeader="export_tHeader" />
   </section>
 </template>
 
@@ -117,10 +117,10 @@ export default {
   data () {
     return {
       //导出组件相关
-      exportFileName: '$ChinaComment$信息',//要导出的文件名
-      currentPageData: [],//当前页面的列表数据
-      tHeader: [$VueExportTHeaderArrayStr$],//当前页面列表的表头汉字数组，导出用
-      filterVal: [$VueExportFilterValArrayStr$],//当前页面列表的表头属性数组，导出用
+      export_exportFileName: '$ChinaComment$信息',//要导出的文件名
+      export_currentPageData: [],//当前页面的列表数据
+      export_tHeader: [$VueExportTHeaderArrayStr$],//当前页面列表的表头汉字数组，导出用
+      export_filterVal: [$VueExportFilterValArrayStr$],//当前页面列表的表头属性数组，导出用
 
       //搜索框相关
 	  c_commonSearchOptionSet: "模糊",//通用查询的默认配置,"模糊"或"精准"
@@ -389,7 +389,7 @@ export default {
     },
     //导出
     handleExport () {
-      this.currentPageData = this.$Modulelogo$s
+      this.export_currentPageData = this.$Modulelogo$s
       this.$refs.cmToolbarExport.showPrintPage()
     },
   },
