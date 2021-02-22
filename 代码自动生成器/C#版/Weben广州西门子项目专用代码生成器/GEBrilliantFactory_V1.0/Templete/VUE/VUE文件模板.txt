@@ -10,14 +10,14 @@
                  @callFunction="callFunction">
         </toolbar>
         <!-- 搜索 -->
-        <SearchForm :formOptions="formOptions"
-                    :commonSearchOptionSet="commonSearchOptionSet"
-                    :drawerSize="drawerSize"
-                    :labelWidth="labelWidth"
-                    :controlStyle="controlStyle"
-					:searchValControlStyle="searchValControlStyle"
-                    :searchFormInputPlaceholder="searchFormInputPlaceholder"
-                    :searchFormInputAttrs="searchFormInputAttrs"
+        <SearchForm :formOptions="h_formOptions"
+                    :commonSearchOptionSet="c_commonSearchOptionSet"
+                    :searchValControlStyle="c_searchValControlStyle"
+                    :searchFormInputPlaceholder="c_searchFormInputPlaceholder"
+                    :searchFormInputAttrs="c_searchFormInputAttrs"
+                    :drawerSize="h_drawerSize"
+                    :labelWidth="h_labelWidth"
+                    :controlStyle="h_controlStyle"
                     ref="ChildSearchForm"
                     @onSearch="get$Modulelogo$s" />
       </el-form>
@@ -123,18 +123,18 @@ export default {
       filterVal: [$VueExportFilterValArrayStr$],//当前页面列表的表头属性数组，导出用
 
       //搜索框相关
-	  commonSearchOptionSet: "模糊",//通用查询的默认配置,"模糊"或"精准"
-	  searchValControlStyle: {//设置通用搜索框的长度等样式 
+	  c_commonSearchOptionSet: "模糊",//通用查询的默认配置,"模糊"或"精准"
+	  c_searchValControlStyle: {//设置通用搜索框的长度等样式 
         width: '300px',
       },
-      controlStyle: {//设置高级搜索控件的长度等样式 
+	  c_searchFormInputPlaceholder: '请输入$SearchFormInputPlaceholderStr$',//要给子搜索组件传递的值
+	  c_searchFormInputAttrs: [$SearchFormInputPlaceholderNameStr$],//要给子搜索组件传递的属性名
+      h_controlStyle: {//设置高级搜索控件的长度等样式 
         width: '300px',
       },
-	  labelWidth: "90px",//显示Label的宽度
-      drawerSize: "550px",//drawner宽度设置
-      searchFormInputPlaceholder: '请输入$SearchFormInputPlaceholderStr$',//要给子搜索组件传递的值
-	  searchFormInputAttrs: [$SearchFormInputPlaceholderNameStr$],//要给子搜索组件传递的属性名
-      formOptions: [
+	  h_labelWidth: "90px",//显示Label的宽度
+      h_drawerSize: "550px",//drawner宽度设置
+      h_formOptions: [
         $FormOptionsStr$
       ],
 
@@ -269,7 +269,6 @@ export default {
             return;
           }
           this.listLoading = false;
-          //NProgress.done();
           if (res.data.success) {
             this.$message({
               message: '删除成功',
@@ -331,7 +330,6 @@ export default {
             let para = Object.assign({}, this.addForm);
             if (this.isAdd) {//新增
               add$Modulelogo$(para).then((res) => {
-
                 if (util.isEmt.format(res)) {
                   this.addLoading = false;
                   return;
@@ -339,7 +337,6 @@ export default {
 
                 if (res.data.success) {
                   this.addLoading = false;
-                  //NProgress.done();
                   this.$message({
                     message: res.data.msg,
                     type: 'success'
@@ -359,7 +356,6 @@ export default {
               });
             } else {//编辑
               edit$Modulelogo$(para).then((res) => {
-
                 if (util.isEmt.format(res)) {
                   this.addLoading = false;
                   return;
