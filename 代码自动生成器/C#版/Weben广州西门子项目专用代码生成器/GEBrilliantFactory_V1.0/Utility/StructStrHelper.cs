@@ -1091,27 +1091,36 @@ where obj.name='" + tableName + "'  ";
                 List<ColumnModel> newList = ListHelper.RemoveIdCreatorModifier(columnModelList);
                 foreach (var columnModel in newList)
                 {
+                    if (columnModel.IsNullable)
+                    {//可以为空
+                        sb.Append("                <el-form-item label=\"" + columnModel.Description + "\" prop=\"" + columnModel.ColumnName + "\" > \n");
+                    }
+                    else
+                    {
+                        sb.Append("                <el-form-item label=\"" + columnModel.Description + "\" prop=\"" + columnModel.ColumnName + "\" :rules=\"[{ required: true, message: '" + columnModel.Description + "不能为空'}]\"> \n");
+                    }
                     DataTypeEnum enumDT = (DataTypeEnum)Enum.Parse(typeof(DataTypeEnum), "dt_" + columnModel.DataType.ToString());
                     switch (enumDT)
                     {
                         case DataTypeEnum.dt_bit:
-                            sb.Append("                <el-form-item label=\"" + columnModel.Description + "\" prop=\"" + columnModel.ColumnName + "\" > \n");
                             sb.Append("                  <el-switch v-model=\"addForm." + columnModel.ColumnName + "\"></el-switch> \n");
-                            sb.Append("                </el-form-item> \n");
+                            break;
+                        case DataTypeEnum.dt_datetime:
+                        case DataTypeEnum.dt_datetime2:
+                            sb.Append("                  <el-date-picker placeholder=\"选择日期时间\"  type=\"datetime\" v-model=\"addForm." + columnModel.ColumnName + "\"></el-date-picker> \n");
+                            break;
+                        case DataTypeEnum.dt_int:
+                        case DataTypeEnum.dt_bigint:
+                        case DataTypeEnum.dt_decimal:
+                        case DataTypeEnum.dt_float:
+                            sb.Append("                  <el-input-number v-model=\"addForm." + columnModel.ColumnName + "\"></el-input-number> \n");
                             break;
                         default:
-                            if (columnModel.IsNullable)
-                            {//可以为空
-                                sb.Append("                <el-form-item label=\"" + columnModel.Description + "\" prop=\"" + columnModel.ColumnName + " \"> \n");
-                            }
-                            else
-                            {
-                                sb.Append("                <el-form-item label=\"" + columnModel.Description + "\" prop=\"" + columnModel.ColumnName + "\" :rules=\"[{ required: true, message: '" + columnModel.Description + "不能为空'}]\"> \n");
-                            }
                             sb.Append("                  <el-input v-model=\"addForm." + columnModel.ColumnName + "\"></el-input> \n");
-                            sb.Append("                </el-form-item> \n");
                             break;
                     }
+
+                    sb.Append("                </el-form-item> \n");
                 }
                 return sb.ToString();
             }
