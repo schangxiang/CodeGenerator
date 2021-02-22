@@ -10,11 +10,11 @@
                  @callFunction="callFunction">
         </toolbar>
         <!-- ËÑË÷ -->
-        <SearchForm :formOptions="h_formOptions"
-                    :commonSearchOptionSet="c_commonSearchOptionSet"
+        <SearchForm :commonSearchOptionSet="c_commonSearchOptionSet"
                     :searchValControlStyle="c_searchValControlStyle"
                     :searchFormInputPlaceholder="c_searchFormInputPlaceholder"
                     :searchFormInputAttrs="c_searchFormInputAttrs"
+					:formOptions="h_formOptions"
                     :drawerSize="h_drawerSize"
                     :labelWidth="h_labelWidth"
                     :controlStyle="h_controlStyle"
