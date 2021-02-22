@@ -19,7 +19,9 @@ namespace GenerateCode_GEBrilliantFactory
 
             str = str.Replace("$el-table-column$", StructStrHelper.GetElTableColumnStr(columnNameList));//列表项
 
+            //新增/编辑界面
             str = str.Replace("$el-item$", StructStrHelper.GetElFormItemStr(columnNameList));
+
             str = str.Replace("$el-form-itemForSearch$", StructStrHelper.GetElFormItemForSearchStr(columnNameList));
 
             //导出字符串
