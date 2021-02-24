@@ -11,6 +11,7 @@ namespace GenerateCode_GEBrilliantFactory
 {
     public class TextHelper
     {
+
         /// <summary>
         /// 读取text文本内容
         /// </summary>
@@ -27,6 +28,8 @@ namespace GenerateCode_GEBrilliantFactory
                 {
                     sb.Append(line.ToString() + " \n");
                 }
+                sr.Close();
+                sr.Dispose();
                 return sb.ToString();
             }
             catch
@@ -34,6 +37,30 @@ namespace GenerateCode_GEBrilliantFactory
                 throw;
             }
         }
+
+        /// <summary>
+        /// 写入text文本内容
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="data"></param>
+        public static void WriteText(string path, string data)
+        {
+            //判断路径是否存在
+            if (!System.IO.File.Exists(path))
+            {
+                throw new Exception("文件不存在");
+            }
+
+            //文件覆盖方式添加内容
+            System.IO.StreamWriter file = new System.IO.StreamWriter(path, false);
+            //保存数据到文件
+            file.Write(data);
+            //关闭文件
+            file.Close();
+            //释放对象
+            file.Dispose();
+        }
+
 
         /// <summary>
         /// 生成文件
