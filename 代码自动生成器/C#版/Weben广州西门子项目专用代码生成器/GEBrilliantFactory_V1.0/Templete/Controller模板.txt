@@ -125,7 +125,11 @@ namespace LES.Core.Api.Controllers
                     data.response = request?.Id.ObjToString();
                 }
             }
-
+			else
+            {
+                data.success = false;
+                data.msg = "更新失败,该$ChinaComment$不存在";
+            }
             return data;
         }
 
@@ -151,7 +155,11 @@ namespace LES.Core.Api.Controllers
                     }
                 }
             }
-
+			else
+            {
+                data.success = false;
+                data.msg = "删除失败,该$ChinaComment$不存在";
+            }
             return data;
         }
 
@@ -183,7 +191,11 @@ namespace LES.Core.Api.Controllers
                     }
                 }
             }
-
+			else
+            {
+                data.success = false;
+                data.msg = "删除失败,该$ChinaComment$不存在";
+            }
             return data;
         }
     }
