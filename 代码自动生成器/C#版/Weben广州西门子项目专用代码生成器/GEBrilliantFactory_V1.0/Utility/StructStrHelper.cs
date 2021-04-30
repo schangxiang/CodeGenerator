@@ -1060,7 +1060,11 @@ where obj.name='" + tableName + "'  ";
                             sb.Append("          </el-table-column> \n");
                             break;
                         case DataTypeEnum.dt_bit:
-                            sb.Append("          <el-table-column prop=\"" + columnModel.ColumnName + "\" label=\"" + columnModel.Description + "\" align=\"center\" :formatter=\"formatterDelFlag\" > \n");
+                            sb.Append("          <el-table-column prop=\"" + columnModel.ColumnName + "\" label=\"" + columnModel.Description + "\" align=\"center\"  > \n");
+                            sb.Append("<template slot-scope=\"scope\">");
+                            sb.Append("<el-tag :type=\"scope.row." + columnModel.ColumnName + "  ? 'danger' : 'success'\"");
+                            sb.Append("disable-transitions>{{scope.row." + columnModel.ColumnName + " ? \"否\":\"是\"}}</el-tag>");
+                            sb.Append(" </template>");
                             sb.Append("          </el-table-column> \n");
                             break;
                         default:
