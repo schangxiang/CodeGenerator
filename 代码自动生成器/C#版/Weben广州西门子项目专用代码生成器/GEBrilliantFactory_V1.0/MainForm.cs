@@ -163,7 +163,8 @@ namespace GenerateCode_GEBrilliantFactory
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.VUE_FunConfig, filePrefixName, entityName, modulelogo);
 
                 //VUE文件
-                str_generate = VUE_Generate.CreateText(tableAlias, modulelogo, primaryKey, columnList, chinaComment);
+                str_generate = VUE_Generate.CreateText(tableAlias, modulelogo, primaryKey, columnList, chinaComment
+                    , this.tb_templeteFileDownName.Text, this.tb_importExcelCategroy.Text);
                 tf = TextHelper.Export2File(tbPath.Text, tableName, str_generate, FileType.VUEFile, filePrefixName, entityName, modulelogo);
 
                 btn_InsertSql_Click(null, null);
@@ -283,6 +284,17 @@ namespace GenerateCode_GEBrilliantFactory
         {
             string connStr = (this.cmb_DataSource.SelectedItem as ListItem).Value;
             this.lbl_DataSource.Text = connStr;
+        }
+
+        private void ck_IsShowImport_CheckedChanged(object sender, EventArgs e)
+        {
+            //this.tb_templeteFileDownName.Enabled = false;
+            //this.tb_importExcelCategroy.Enabled = false;
+            //if (this.ck_IsShowImport.Checked)
+            //{
+            //    this.tb_templeteFileDownName.Enabled = true;
+            //    this.tb_importExcelCategroy.Enabled = true;
+            //}
         }
     }
 }

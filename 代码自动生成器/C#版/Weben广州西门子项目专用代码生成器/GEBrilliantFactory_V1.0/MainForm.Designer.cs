@@ -62,8 +62,15 @@
             this.lbl_DataSource = new System.Windows.Forms.Label();
             this.cmb_DataSource = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ck_IsShowImport = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tb_importExcelCategroy = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.tb_templeteFileDownName = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnPath
@@ -147,7 +154,7 @@
             // 
             // tb_WCF_NameSpacePath
             // 
-            this.tb_WCF_NameSpacePath.Location = new System.Drawing.Point(831, 391);
+            this.tb_WCF_NameSpacePath.Location = new System.Drawing.Point(769, 216);
             this.tb_WCF_NameSpacePath.Margin = new System.Windows.Forms.Padding(4);
             this.tb_WCF_NameSpacePath.Name = "tb_WCF_NameSpacePath";
             this.tb_WCF_NameSpacePath.Size = new System.Drawing.Size(261, 25);
@@ -156,7 +163,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(687, 394);
+            this.label2.Location = new System.Drawing.Point(625, 219);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(129, 15);
@@ -165,7 +172,7 @@
             // 
             // tb_ChinaComment
             // 
-            this.tb_ChinaComment.Location = new System.Drawing.Point(305, 324);
+            this.tb_ChinaComment.Location = new System.Drawing.Point(305, 261);
             this.tb_ChinaComment.Margin = new System.Windows.Forms.Padding(4);
             this.tb_ChinaComment.Name = "tb_ChinaComment";
             this.tb_ChinaComment.Size = new System.Drawing.Size(261, 25);
@@ -174,7 +181,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 324);
+            this.label4.Location = new System.Drawing.Point(45, 261);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(105, 15);
@@ -183,7 +190,7 @@
             // 
             // tb_CreatePerson
             // 
-            this.tb_CreatePerson.Location = new System.Drawing.Point(305, 381);
+            this.tb_CreatePerson.Location = new System.Drawing.Point(305, 318);
             this.tb_CreatePerson.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CreatePerson.Name = "tb_CreatePerson";
             this.tb_CreatePerson.Size = new System.Drawing.Size(264, 25);
@@ -192,7 +199,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(45, 393);
+            this.label5.Location = new System.Drawing.Point(45, 330);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(135, 15);
@@ -331,7 +338,7 @@
             // 
             // tb_RoutePrefix
             // 
-            this.tb_RoutePrefix.Location = new System.Drawing.Point(797, 428);
+            this.tb_RoutePrefix.Location = new System.Drawing.Point(735, 253);
             this.tb_RoutePrefix.Margin = new System.Windows.Forms.Padding(4);
             this.tb_RoutePrefix.Name = "tb_RoutePrefix";
             this.tb_RoutePrefix.Size = new System.Drawing.Size(192, 25);
@@ -341,7 +348,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(697, 436);
+            this.label13.Location = new System.Drawing.Point(635, 261);
             this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(99, 15);
@@ -357,7 +364,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(1092, 102);
+            this.groupBox1.Size = new System.Drawing.Size(1092, 82);
             this.groupBox1.TabIndex = 45;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据库配置";
@@ -365,7 +372,7 @@
             // lbl_DataSource
             // 
             this.lbl_DataSource.AutoSize = true;
-            this.lbl_DataSource.Location = new System.Drawing.Point(259, 50);
+            this.lbl_DataSource.Location = new System.Drawing.Point(259, 40);
             this.lbl_DataSource.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_DataSource.Name = "lbl_DataSource";
             this.lbl_DataSource.Size = new System.Drawing.Size(112, 15);
@@ -375,7 +382,7 @@
             // cmb_DataSource
             // 
             this.cmb_DataSource.FormattingEnabled = true;
-            this.cmb_DataSource.Location = new System.Drawing.Point(45, 46);
+            this.cmb_DataSource.Location = new System.Drawing.Point(45, 36);
             this.cmb_DataSource.Margin = new System.Windows.Forms.Padding(4);
             this.cmb_DataSource.Name = "cmb_DataSource";
             this.cmb_DataSource.Size = new System.Drawing.Size(191, 23);
@@ -384,6 +391,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.tb_FileName);
             this.groupBox2.Controls.Add(this.lblds);
             this.groupBox2.Controls.Add(this.tb_RoutePrefix);
@@ -409,14 +417,76 @@
             this.groupBox2.Controls.Add(this.tb_EntityProName);
             this.groupBox2.Controls.Add(this.tb_EntityName);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Location = new System.Drawing.Point(68, 139);
+            this.groupBox2.Location = new System.Drawing.Point(68, 105);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(1092, 484);
+            this.groupBox2.Size = new System.Drawing.Size(1092, 518);
             this.groupBox2.TabIndex = 46;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "自定义配置";
+            // 
+            // ck_IsShowImport
+            // 
+            this.ck_IsShowImport.AutoSize = true;
+            this.ck_IsShowImport.Location = new System.Drawing.Point(28, 37);
+            this.ck_IsShowImport.Name = "ck_IsShowImport";
+            this.ck_IsShowImport.Size = new System.Drawing.Size(134, 19);
+            this.ck_IsShowImport.TabIndex = 45;
+            this.ck_IsShowImport.Text = "是否有导入功能";
+            this.ck_IsShowImport.UseVisualStyleBackColor = true;
+            this.ck_IsShowImport.Visible = false;
+            this.ck_IsShowImport.CheckedChanged += new System.EventHandler(this.ck_IsShowImport_CheckedChanged);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tb_importExcelCategroy);
+            this.groupBox3.Controls.Add(this.ck_IsShowImport);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.tb_templeteFileDownName);
+            this.groupBox3.Controls.Add(this.label14);
+            this.groupBox3.Location = new System.Drawing.Point(48, 364);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(362, 147);
+            this.groupBox3.TabIndex = 46;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "导入功能";
+            // 
+            // tb_importExcelCategroy
+            // 
+            this.tb_importExcelCategroy.Location = new System.Drawing.Point(191, 107);
+            this.tb_importExcelCategroy.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_importExcelCategroy.Name = "tb_importExcelCategroy";
+            this.tb_importExcelCategroy.Size = new System.Drawing.Size(149, 25);
+            this.tb_importExcelCategroy.TabIndex = 50;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 117);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(150, 15);
+            this.label12.TabIndex = 49;
+            this.label12.Text = "上传文件的请求分类:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(14, 75);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(105, 15);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "文件下载名字:";
+            // 
+            // tb_templeteFileDownName
+            // 
+            this.tb_templeteFileDownName.Location = new System.Drawing.Point(191, 72);
+            this.tb_templeteFileDownName.Margin = new System.Windows.Forms.Padding(4);
+            this.tb_templeteFileDownName.Name = "tb_templeteFileDownName";
+            this.tb_templeteFileDownName.Size = new System.Drawing.Size(149, 25);
+            this.tb_templeteFileDownName.TabIndex = 48;
             // 
             // MainForm
             // 
@@ -439,6 +509,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,6 +552,12 @@
         private System.Windows.Forms.Label lbl_DataSource;
         private System.Windows.Forms.ComboBox cmb_DataSource;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox ck_IsShowImport;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.TextBox tb_importExcelCategroy;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox tb_templeteFileDownName;
+        private System.Windows.Forms.Label label14;
     }
 }
 

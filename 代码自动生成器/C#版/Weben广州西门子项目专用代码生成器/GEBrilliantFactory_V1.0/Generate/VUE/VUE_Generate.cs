@@ -12,7 +12,9 @@ namespace GenerateCode_GEBrilliantFactory
     /// </summary>
     public class VUE_Generate
     {
-        public static string CreateText(string TableAlias, string modulelogo, string primaryKey, List<ColumnModel> columnNameList, string ChinaComment)
+        public static string CreateText(string TableAlias, string modulelogo, string primaryKey,
+            List<ColumnModel> columnNameList, string ChinaComment
+            , string emport_templeteFileDownName, string emport_excelCategroy)
         {
             var str = TextHelper.ReadText(@"Templete\VUE\VUE文件模板.txt");
 
@@ -43,6 +45,10 @@ namespace GenerateCode_GEBrilliantFactory
             str = str.Replace("$Modulelogo$", modulelogo);//表别名(他一定要在最后替换)
             str = str.Replace("$TableAlias$", TableAlias);//表别名(他一定要在最后替换)
             str = str.Replace("$PrimaryKey$", primaryKey);//主键
+
+            //替换导入功能
+            str = str.Replace("$emport_templeteFileDownName$", emport_templeteFileDownName);
+            str = str.Replace("$emport_excelCategroy$", emport_excelCategroy);
 
             return str;
         }

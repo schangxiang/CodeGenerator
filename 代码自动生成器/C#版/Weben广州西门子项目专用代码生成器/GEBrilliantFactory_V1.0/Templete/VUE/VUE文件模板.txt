@@ -98,6 +98,10 @@
                    :filterVal="export_filterVal"
                    :currentPageData="export_currentPageData"
                    :tHeader="export_tHeader" />
+	<!-- 导入Excel组件 -->
+    <ToolbarImportExcel ref="tbImportExcel"
+                        :importExcelCategroy="emport_excelCategroy"
+                        :templeteFileDownName="emport_templeteFileDownName"></ToolbarImportExcel>
   </section>
 </template>
 
@@ -108,14 +112,18 @@ import { getButtonList } from "../../promissionRouter";
 import Toolbar from "../../components/ToolbarButton";
 import SearchForm from "../../components/SearchForm";
 import ToolbarExport from "../../components/ToolbarExport";
+import ToolbarImportExcel from "../../components/ToolbarImportExcel";
 import { formatDate, setformOptionsNewValue } from '../../../util/tools'
 import { isShowOperatorButtonCommon, isNeedShowOperatorColumn } from '../../../util/common'
 
 
 export default {
-  components: { Toolbar, SearchForm, ToolbarExport },//注册子组件
+  components: { Toolbar, SearchForm, ToolbarExport,ToolbarImportExcel },//注册子组件
   data () {
     return {
+	  //导入Excel数据相关
+      emport_templeteFileDownName: '$emport_templeteFileDownName$.xlsx',//文件下载名字
+      emport_excelCategroy: "$emport_excelCategroy$",//上传文件的请求分类
       //导出组件相关
       export_exportFileName: '$ChinaComment$信息',//要导出的文件名
       export_currentPageData: [],//当前页面的列表数据
@@ -392,6 +400,10 @@ export default {
       this.export_currentPageData = this.$Modulelogo$s
       this.$refs.cmToolbarExport.showPrintPage()
     },
+	//导入 
+    handleImport () {
+      this.$refs.tbImportExcel.showPage()
+    }
   },
   mounted () {
     this.get$Modulelogo$s();
