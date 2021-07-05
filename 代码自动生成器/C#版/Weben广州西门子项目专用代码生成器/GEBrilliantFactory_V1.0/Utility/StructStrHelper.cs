@@ -1196,8 +1196,9 @@ where obj.name='" + tableName + "'  ";
             }
         }
 
+       
         /// <summary>
-        /// 获取VUE 导出数组字符串-汉字
+        /// 获取VUE 导出数组字符串-汉字+属性
         /// </summary>
         /// <param name="columnModelList"></param>
         /// <returns></returns>
@@ -1211,7 +1212,7 @@ where obj.name='" + tableName + "'  ";
                 {
                     if (columnModel.IsPrimaryKey == false)
                     {
-                        sb.Append("'" + columnModel.Description + "',");
+                        sb.Append("'" + columnModel.ColumnName + "':'" + columnModel.Description + "',");
                     }
                 }
                 //去掉最后一个,
@@ -1258,34 +1259,7 @@ where obj.name='" + tableName + "'  ";
             }
         }
 
-        /// <summary>
-        /// 获取VUE 导出数组字符串-英文
-        /// </summary>
-        /// <param name="columnModelList"></param>
-        /// <returns></returns>
-        public static string GetVueExportFilterValArrayStr(List<ColumnModel> columnModelList)
-        {
-            StringBuilder sb = new StringBuilder();
-            try
-            {
-                List<ColumnModel> newList = ListHelper.RemoveIdOperationRemarkCreateIdModifyId(columnModelList);
-                foreach (var columnModel in newList)
-                {
-                    if (columnModel.IsPrimaryKey == false)
-                    {
-                        sb.Append("'" + columnModel.ColumnName + "',");
-                    }
-                }
-                //去掉最后一个,
-                var res = sb.ToString();
-                res = res.Substring(0, res.Length - 1);
-                return res;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        
 
 
         /// <summary>

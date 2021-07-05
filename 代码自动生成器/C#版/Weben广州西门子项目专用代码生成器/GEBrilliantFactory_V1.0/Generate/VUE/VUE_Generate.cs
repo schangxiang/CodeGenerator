@@ -27,8 +27,7 @@ namespace GenerateCode_GEBrilliantFactory
             str = str.Replace("$el-form-itemForSearch$", StructStrHelper.GetElFormItemForSearchStr(columnNameList));
 
             //导出字符串
-            str = str.Replace("$VueExportFilterValArrayStr$", StructStrHelper.GetVueExportFilterValArrayStr(columnNameList));
-            str = str.Replace("$VueExportTHeaderArrayStr$", StructStrHelper.GetVueExportTHeaderArrayStr(columnNameList));
+            str = str.Replace("$VueExportColumnHeaderStr$", StructStrHelper.GetVueExportTHeaderArrayStr(columnNameList));
 
 
             //公共查询的列

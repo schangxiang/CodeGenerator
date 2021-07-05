@@ -95,9 +95,8 @@
     <!-- 导出组件 -->
     <ToolbarExport ref="cmToolbarExport"
                    :exportFileName="export_exportFileName"
-                   :filterVal="export_filterVal"
                    :currentPageData="export_currentPageData"
-                   :tHeader="export_tHeader" />
+                   :exportColumnHeader="export_columnHeader" />
 	<!-- 导入Excel组件 -->
     <ToolbarImportExcel ref="tbImportExcel"
                         :importExcelCategroy="emport_excelCategroy"
@@ -127,8 +126,7 @@ export default {
       //导出组件相关
       export_exportFileName: '$ChinaComment$信息',//要导出的文件名
       export_currentPageData: [],//当前页面的列表数据
-      export_tHeader: [$VueExportTHeaderArrayStr$],//当前页面列表的表头汉字数组，导出用
-      export_filterVal: [$VueExportFilterValArrayStr$],//当前页面列表的表头属性数组，导出用
+	  export_columnHeader: {$VueExportColumnHeaderStr$},//当前页面列表的表头汉字和属性数组，导出用 
 
       //搜索框相关
 	  c_commonSearchOptionSet: "模糊",//通用查询的默认配置,"模糊"或"精准"
